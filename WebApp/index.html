@@ -4,26 +4,20 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="//www.parsecdn.com/js/parse-1.2.16.min.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="index.js"></script>
 	</head>
 	<body>
 		<h1>EasyTab 0.0</h1>
-		<div>
-			<div id="invalidCredentials">
-				Credentials are invalid. Please sign up or try again.
-			</div>
-			<div id>
-				Username: <input type="text" id="username" name="username">
-			</div>
-			<div>
-				Password: <input type="password" id="password" name="password">
-			</div>
-			<div>
-				<button id="login" type="button">Log In</button>
-			</div>
+		<div class="errorMessage invalidCredentials">
+				Credentials are invalid. Please <a href="signup.html">sign up</a> or try again.
 		</div>
+		<form class="loginForm" action="menu.html">
+			Username: <input type="text" class="emailField" name="email"><br>
+			Password: <input type="password" class="passwordField" name="password"><br>
+			<input type="submit" class="loginButton" value="Log In">
+		</form>
 		<div>
-			<button type="signup">Sign Up</button>
+			<a href="signup.html">Sign Up</a>
 		<div>
 	</body>
 </html>
