@@ -3,7 +3,7 @@ $(document).ready(function() {
 	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");	
 
 	if (Parse.User.current()) {
-		window.location.replace("../mainmenu.html")
+		window.location.replace("./home.html")
 	}
 
 	$(".signupForm").submit(function(event) {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 			user.signUp(null, {
 				success: function(user) {
-					window.location.replace("../mainmenu.html")
+					window.location.replace("./mainmenu.html")
 				},
 				error: function(user, error) {
 					if (error.code == 202)
