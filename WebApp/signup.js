@@ -1,7 +1,13 @@
 $(document).ready(function() {
-	
-	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");
+
+	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");	
+
+	if (Parse.User.current()) {
+		window.location.replace("../mainmenu.html")
+	}
+
 	$(".signupForm").submit(function(event) {
+		event.preventDefault();
 
 		var unknownErrorText = "An error occured. Please try again later.";
 		var duplicateEmailText = "That email address is already in use. Please log in or sign up with a different email address.";
@@ -34,7 +40,7 @@ $(document).ready(function() {
 
 			user.signUp(null, {
 				success: function(user) {
-
+					window.location.replace("../mainmenu.html")
 				},
 				error: function(user, error) {
 					if (error.code == 202)
@@ -43,26 +49,13 @@ $(document).ready(function() {
 						signupError(unknownErrorText);
 					}
 				}
-			})
+			});
 		}
-
-		event.preventDefault();
 
 		function signupError(message) {
+			$(".signupError").removeClass("positive").addClass("negative");
 			$(".signupError").text(message)
 			$(".signupError").show();
-		}
-
-		function validLocation(location) {
-			return location != "";
-		}
-
-		function validEmail(email) {
-			return email != "";
-		}
-
-		function validPassword(password) {
-			return password != "";
 		}
 	});
 });
