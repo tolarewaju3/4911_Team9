@@ -1,19 +1,5 @@
-.feedback
+.errorMessage
 {
 	display: none;
-}
-
-.feedback.negative
-{
 	color: red;
-}
-
-.feedback.positive
-{
-	color: blue;
-}
-
-form
-{
-	margin-bottom:20px;
 }
