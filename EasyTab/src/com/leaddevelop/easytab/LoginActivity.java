@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -16,6 +18,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Parse.initialize(this, "X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "oNXU5Lz9lfgEiFafCil80dUAXJJjIFW3EVhUN8BF");
 		setContentView(R.layout.activity_login);
 	}
 
@@ -38,9 +41,14 @@ public class LoginActivity extends Activity {
 			public void done(ParseUser user, ParseException ex) {
 				// TODO Auto-generated method stub
 				if(user != null) {
-					completeLogin();
+//					completeLogin();
+					Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+					startActivity(intent);
+
 				} else {
-					// failure
+					Toast.makeText(getApplicationContext(), "Login failed!", 5).show();
+//					toast.setView(getCurrentFocus());
+//					toast.show();
 				}
 			}
 		});
