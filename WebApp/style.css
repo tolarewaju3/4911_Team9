@@ -18,7 +18,12 @@ h1, h2, h3, h4, h5 {
 	.banner:hover {
 		cursor: pointer;
 	}
-
+.footer {
+	padding: 1em 1.5em;
+	margin-top: 3em;
+	background-color: rgb(84, 139, 156);
+	text-align: center;
+}
 .btn {
 	font-family: 'Raleway', Arial !important;
 	width: 100%;
@@ -44,6 +49,10 @@ h1, h2, h3, h4, h5 {
 
 .centered {
 	text-align: center;
+}
+.dark-blue {
+	background-color: rgb(84, 139, 156);
+	color: rgb(223, 234, 240);
 }
 
 /* Defining colors */
