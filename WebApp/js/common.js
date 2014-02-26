@@ -22,3 +22,9 @@ function validTaxPct(taxPct) {
 	var re = /^(([1-9](\d)*)|[0]?)(\.\d{1,2})?$/
 	return re.test(taxPct);
 }
+
+$(document).ready(function() {
+	$('.banner').on('click', function() {
+		window.location.replace("./home.html")
+	});
+});

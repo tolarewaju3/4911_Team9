@@ -1,3 +1,67 @@
+/* Home Page Styles */
+body {
+	background-image: url('img/bg1.jpg');
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Raleway', Arial !important;
+}
+
+.banner {
+	padding: 1em 1.5em;
+	margin-bottom: 1em;
+	background-color: rgb(84, 139, 156);
+	color: rgb(170, 217, 165); }
+	.banner h1 {
+		color: rgb(223, 234, 240);
+	}
+	.banner:hover {
+		cursor: pointer;
+	}
+
+.btn {
+	font-family: 'Raleway', Arial !important;
+	width: 100%;
+	border: none;
+	background:none;
+	background-color: rgb(111, 184, 121);
+	text-align: center;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0em;
+	height: 45px;
+	line-height: 45px;
+	display:block;
+	font-size: 1em;
+	color: white; }
+	.btn:hover {
+		cursor: pointer;
+	}
+	
+.bump {
+	margin-top:1em !important;
+}
+
+.centered {
+	text-align: center;
+}
+
+/* Defining colors */
+/* 	almost white blue : rgb(223, 234, 240)
+	light blue : rgb(188, 216, 227)
+	dark blue : rgb(84, 139, 156)
+	dark green : rgb(111, 184, 121)
+	light green : rgb(170, 217, 165)
+	almost white green : rgb(221, 247, 200)
+	** see color palette picture in img folder**
+*/
+
+/* Main Menu Styles */
+.logoutButton {
+	background-color: rgb(188, 216, 227);
+	color: rgb(84, 139, 156);
+}
+
 form
 {
 	margin-bottom: 20px;
@@ -5,6 +69,7 @@ form
 
 .feedback
 {
+	margin: 1em 0;
 	display: none;
 }
 

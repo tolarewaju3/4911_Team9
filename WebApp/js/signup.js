@@ -6,7 +6,7 @@ $(document).ready(function() {
 		window.location.replace("./home.html")
 	}
 
-	$(".signupForm").submit(function(event) {
+	$(".signUpForm").submit(function(event) {
 		event.preventDefault();
 
 		var unknownErrorText = "An error occured. Please try again later.";

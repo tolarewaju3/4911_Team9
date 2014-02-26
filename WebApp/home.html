@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" href="css/foundation.css" />	
+		
+		<script src="js/vendor/modernizr.js"></script>
 		<script src="http://www.parsecdn.com/js/parse-1.2.16.min.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
-		<script type="text/javascript" src="js/home.js"></script>	</head>
+		
+		<script type="text/javascript" src="js/home.js"></script>
+	</head>
 	<body>
-		<h1>EasyTab 0.0</h1>
-		<div class="feedback negative invalidCredentials">
-				Credentials are invalid. Please <a href="signup.html">sign up</a> or try again.
+		<div class="banner">
+			<h1>EasyTab 0.5</h1>
 		</div>
-		<form class="loginForm" action="menu.html">
-			Username: <input type="text" class="emailField" name="email"><br>
-			Password: <input type="password" class="passwordField" name="password"><br>
-			<input type="submit" class="loginButton" value="Log In">
-		</form>
-		<div>
-			<a href="signup.html">Sign Up</a>
-		<div>
+		<div class="row">
+			<div class="large-4 columns">
+				<form class="loginForm" action="menu.html">
+					<div class="row">
+						<div class="large-12 columns">
+							<h5>Log In</h5>
+							<div class="row">
+								<input type="text" class="emailField" name="email" placeholder="Email">
+								<input type="password" class="passwordField" name="password" placeholder="Password">
+							</div>
+						</div>
+					</div>
+					<div class="feedback negative invalidCredentials">
+						Credentials are invalid. Please <a href="signup.html">sign up</a> or try again.
+					</div>
+					<div class="row">
+						<div class="large-12 large-centered columns">
+							<div class="large-6 small-6 column">
+									<a class="btn" href="signup.html">Sign Up</a>
+								</div>
+								<div class="large-6 small-6 column">
+									<input type="submit" class="loginButton btn" value="Log In">
+								</div>
+							
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="large-8 columns">
+				<h3>Welcome to the new way to order !<h3>
+				<img src="http://placehold.it/635x300">
+			</div>
+		</div>
 	</body>
 </html>
