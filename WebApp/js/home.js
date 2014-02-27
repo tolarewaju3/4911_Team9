@@ -4,8 +4,8 @@ $(document).ready(function() {
 
 	if (Parse.User.current()) {
 		window.location.replace("./mainmenu.html");
-	}
-
+	}	
+	
 	$(".loginForm").submit(function(event) {
 		event.preventDefault();
 

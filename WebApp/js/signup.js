@@ -37,6 +37,7 @@ $(document).ready(function() {
 			user.set("username", email);
 			user.set("email", email);
 			user.set("password", password);
+			user.set("hasMenu", false);
 
 			user.signUp(null, {
 				success: function(user) {

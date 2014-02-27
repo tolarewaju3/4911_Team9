@@ -1,29 +1,32 @@
 /* Home Page Styles */
 body {
-	background-image: url('img/bg1.jpg');
+	background-color: rgb(84, 139, 156);	
 }
 
 h1, h2, h3, h4, h5 {
 	font-family: 'Raleway', Arial !important;
 }
 
-.banner {
+header {
 	padding: 1em 1.5em;
-	margin-bottom: 1em;
-	background-color: rgb(84, 139, 156);
-	color: rgb(170, 217, 165); }
-	.banner h1 {
+	color: rgb(170, 217, 165);}
+	header h1 {
 		color: rgb(223, 234, 240);
+		display: inline-block;
 	}
-	.banner:hover {
+	header h1:hover {
 		cursor: pointer;
 	}
-.footer {
-	padding: 1em 1.5em;
-	margin-top: 3em;
-	background-color: rgb(84, 139, 156);
+footer {
 	text-align: center;
 }
+
+.main {
+	background-image: url('img/bg1.jpg');
+	padding: 2em 0 3em 0;
+	min-height: 450px;
+}
+
 .btn {
 	font-family: 'Raleway', Arial !important;
 	width: 100%;
@@ -42,7 +45,11 @@ h1, h2, h3, h4, h5 {
 	.btn:hover {
 		cursor: pointer;
 	}
-	
+
+/* Misc. */
+.hide {
+	display: none;
+}
 .bump {
 	margin-top:1em !important;
 }
@@ -50,6 +57,8 @@ h1, h2, h3, h4, h5 {
 .centered {
 	text-align: center;
 }
+
+/* Colors */
 .dark-blue {
 	background-color: rgb(84, 139, 156);
 	color: rgb(223, 234, 240);
@@ -71,10 +80,14 @@ h1, h2, h3, h4, h5 {
 	color: rgb(84, 139, 156);
 }
 
-form
-{
-	margin-bottom: 20px;
-}
+.card {
+	height: 120px; 
+	text-align: center;
+	}
+	.card a {
+		height: 100%;
+	}
+
 
 .feedback
 {

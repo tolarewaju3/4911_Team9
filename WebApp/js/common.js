@@ -24,7 +24,7 @@ function validTaxPct(taxPct) {
 }
 
 $(document).ready(function() {
-	$('.banner').on('click', function() {
+	$('header h1').on('click', function() {
 		window.location.replace("./home.html")
 	});
 });
