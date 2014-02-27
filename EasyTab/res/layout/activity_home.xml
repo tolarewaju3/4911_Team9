@@ -8,9 +8,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HomeActivity" >
 
-    <TextView
+    <Button
+        android:id="@+id/pay_now_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_easytab" />
+        android:layout_alignLeft="@+id/place_order_button"
+        android:layout_alignRight="@+id/place_order_button"
+        android:layout_centerVertical="true"
+        android:text="@string/pay_now_text" />
+
+    <Button
+        android:id="@+id/place_order_button"
+        android:minWidth="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pay_now_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:text="@string/place_order_text" />
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pay_now_button"
+        android:layout_alignRight="@+id/pay_now_button"
+        android:layout_below="@+id/pay_now_button"
+        android:layout_marginTop="18dp"
+        android:text="@string/settings_text" />
 
 </RelativeLayout>
