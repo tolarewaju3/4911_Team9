@@ -47,8 +47,6 @@ public class LoginActivity extends Activity {
 
 				} else {
 					Toast.makeText(getApplicationContext(), "Login failed!", 5).show();
-					Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-					startActivity(intent);
 //					toast.setView(getCurrentFocus());
 //					toast.show();
 				}
