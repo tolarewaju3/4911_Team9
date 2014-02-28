@@ -1,11 +1,10 @@
 package com.leaddevelop.easytab;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
-import com.parse.Parse;
-import com.parse.ParseAnalytics;
-import com.parse.ParseObject;
+import android.view.View;
 
 public class HomeActivity extends Activity {
 
@@ -27,4 +26,9 @@ public class HomeActivity extends Activity {
 		return true;
 	}
 
+	public void onPressPay(View view) {
+		Intent intent = new Intent(this, PayActivity.class);
+		startActivity(intent);
+	}
+	
 }

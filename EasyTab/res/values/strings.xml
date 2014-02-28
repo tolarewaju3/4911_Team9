@@ -12,5 +12,6 @@
     <string name="pay_now_text">Pay now</string>
     <string name="settings_text">Settings</string>
     <string name="place_order_text">Place order</string>
+    <string name="title_activity_pay">PayActivity</string>
 
 </resources>

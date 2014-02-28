@@ -15,7 +15,8 @@
         android:layout_alignLeft="@+id/place_order_button"
         android:layout_alignRight="@+id/place_order_button"
         android:layout_centerVertical="true"
-        android:text="@string/pay_now_text" />
+        android:text="@string/pay_now_text"
+        android:onClick="onPressPay" />
 
     <Button
         android:id="@+id/place_order_button"
