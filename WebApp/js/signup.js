@@ -8,35 +8,27 @@ $(document).ready(function() {
 
 	$(".signUpForm").submit(function(event) {
 		event.preventDefault();
-
-		var unknownErrorText = "An error occured. Please try again later.";
+ 
 		var duplicateEmailText = "That email address is already in use. Please log in or sign up with a different email address.";
-		var invalidLocationText = "Invalid location.";
-		var invalidEmailText = "Invalid email.";
-		var invalidPasswordText = "Invalid password.";
 
 		var location = $(".locationField").val();
+		var taxPct = $(".taxPctField").val();
 		var email = $(".emailField").val();
 		var password = $(".passwordField").val();
+		var state = $(".stateSelect").val();
+		var address = $(".addressField").val();
+		var zipCode = $(".zipField").val();
 
-		if (!validLocation(location)) {
-			signupError(invalidLocationText);
-		}
-
-		else if (!validEmail(email)) {
-			signupError(invalidEmailText);
-		}
-
-		else if (!validPassword(password)) {
-			signupError(invalidPasswordText);
-		}
-
-		else {
+		if (validateSettings(location, taxPct, email, password, address, zipCode, this)) {
 			var user = new Parse.User();
 			user.set("location", location);
+			user.set("taxPct", taxPct);
 			user.set("username", email);
 			user.set("email", email);
 			user.set("password", password);
+			user.set("state", state);
+			user.set("address", address);
+			user.set("zipCode", zipCode);
 			user.set("hasMenu", false);
 
 			user.signUp(null, {
