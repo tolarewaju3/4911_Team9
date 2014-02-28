@@ -6,9 +6,10 @@ $(document).ready(function() {
 	
 	if (currentUser) {
 		var hasMenu = currentUser.get("Menu");
-		if (!hasMenu) {
-			$('.menuModify').addClass('hide');
-			$('.menuAdd').removeClass('hide');
+		if (hasMenu) {
+			$('.menu').html("Modify Menu");
+		} else {
+			$('.menu').html("Add Menu");
 		}
 	} else {
 		window.location.replace("./home.html");

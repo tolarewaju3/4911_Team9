@@ -83,6 +83,7 @@ footer {
 .card {
 	height: 120px; 
 	text-align: center;
+	margin-bottom: 1em;
 	}
 	.card a {
 		height: 100%;
