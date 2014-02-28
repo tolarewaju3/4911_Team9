@@ -1,0 +1,51 @@
+// Test the login page
+INPUT: open home.html
+EXPECTED OUTPUT: login page should appear
+INPUT: click the "Log In" button
+EXPECTED OUTPUT: error message should display
+INPUT: click the "sign up" link contained within the error message
+EXPECTED OUTPUT: signup page should appear
+INPUT: click the browser's back button
+INPUT: enter "testUser0@gmail.com" into Username field
+INPUT: enter "wrongPW0" into Password field
+INPUT: click the "Log In" button
+EXPECTED OUTPUT: error message should display
+INPUT: replace password field with "testPW0"
+INPUT: click the "Log In" button
+EXPECTED OUTPUT: main menu page should appear
+INPUT: click the "Log Out" button
+EXPECTED OUTPUT: login page should appear
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: signup page should appear
+
+// Test the signup page
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: "invalid location" message should display
+INPUT: enter something into the location field
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: "invalid address" message should display
+INPUT: enter something into the address field
+INPUT: enter a four digit zip code into the zip code field
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: "invalid zip code" message should display
+INPUT: replace zip code field with a valid zip code
+INPUT: enter "testUser0@gmail" into email field
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: "invalid email" message should display
+INPUT: replace email field with "testUser0@gmail.com"
+INPUT: enter four character password into password field
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: "invalid password" message should display
+INPUT: replace password field with a valid password
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: "duplicate email" message should display
+INPUT: replace email field with new email address
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: main menu page should appear
+
+// Test the account settings page
+INPUT: click the "Account Settings" button
+OUTPUT: all fields, except "password", should contain values corresponding to the ones assigned during signup
+INPUT: clear text from all fields
+INPUT: repeat the entire "signup" test shown above, replacing the "Sign Up" button with the "Save Changes Button"
+OUTPUT: all outputs should be the same as in the "signup" test, except the last output should be a positive feedback message instead of a redirect
