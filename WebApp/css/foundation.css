@@ -4046,7 +4046,7 @@ table {
   border: solid 1px #dddddd; }
   table thead,
   table tfoot {
-    background: whitesmoke; }
+    background: rgb(218, 218, 218); }
     table thead tr th,
     table thead tr td,
     table tfoot tr th,

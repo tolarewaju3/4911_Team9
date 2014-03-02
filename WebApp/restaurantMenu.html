@@ -26,14 +26,28 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="column helperText">
+					To get started, tell us your desired menu name.
+				</div>
+			</div>
+			<div class="row">
 				<div class="large-6 columns">
-					<div class="row bump">
-						<div class="column">
-							<label>Menu Name</label>
-							<input type="text" name="menuName" placeholder="Ex. Lunch (11 am - 3 pm), Dinner Menu">
+					<form class="menuNameForm">
+						<div class="row bump">
+							<div class="large-10 columns">
+								<label>Menu Name</label>
+								<input type="text" name="menuName" class="menuNameField" placeholder="Ex. Lunch (11 am - 3 pm), Dinner Menu">
+							</div>
 						</div>
-					</div>
-					<div class="row">
+						<div class="row">
+							<div class="large-4 columns">
+								<input type="submit" value="Save Name" class="btn submitMenuName">
+							</div>
+						</div>
+						<div class="feedback"></div>
+					</form>
+					
+					<div class="row itemsTable hide">
 						<div class="column">
 							<table width="100%">
 								<thead>
@@ -41,8 +55,8 @@
 									<th width="100">Price</th>
 									<th>Description</th>
 								</thead>
-								<tbody>
-									<tr>
+								<tbody class="tableBody">
+									<tr class="noItems">
 										<td colspan="3">You have no items.</td>
 									</tr>
 								</tbody>
@@ -50,8 +64,30 @@
 						</div>
 					</div>
 				</div>
-				<div class="large-6 columns">
-					
+				<div class="large-6 columns actionPanel hide bump">
+					<div class="row">
+						<div class="large-7 large-centered card columns">
+							<a class="btn addItem" href="#">Add Item</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-7 large-centered card columns">
+							<a class="btn editItem" href="#">Edit Item</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-7 large-centered card columns">
+							<a class="btn removeItem" href="#">Remove Items</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-6 column">
+							<a class="btn deleteMenu">Discard Menu</a>
+						</div>
+						<div class="large-6 column">
+							<a class="btn saveChanges dark-blue" href="#">Save Changes</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

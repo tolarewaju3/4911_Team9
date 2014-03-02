@@ -50,6 +50,7 @@ footer {
 .hide {
 	display: none;
 }
+
 .bump {
 	margin-top:1em !important;
 }
@@ -62,6 +63,10 @@ footer {
 .dark-blue {
 	background-color: rgb(84, 139, 156);
 	color: rgb(223, 234, 240);
+}
+
+.helperText {
+	margin: 1em 0;
 }
 
 /* Defining colors */
@@ -86,22 +91,21 @@ footer {
 	margin-bottom: 1em;
 	}
 	.card a {
+		text-align: center;
 		height: 100%;
 	}
 
-
-.feedback
-{
+.feedback {
 	margin: 1em 0;
 	display: none;
 }
 
-.feedback.positive
-{
+.feedback.positive {
 	color: blue;
 }
 
-.feedback.negative
-{
+.feedback.negative {
 	color: red;
 }
+
+/* Add/Edit Menu */
