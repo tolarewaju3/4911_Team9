@@ -33,7 +33,13 @@
         </activity>
         <activity
             android:name="com.leaddevelop.easytab.PayActivity"
-            android:label="@string/title_activity_pay" >
+            android:label="@string/title_activity_pay"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.leaddevelop.easytab.SubmitActivity"
+            android:label="@string/title_activity_submit"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 

@@ -13,5 +13,11 @@
     <string name="settings_text">Settings</string>
     <string name="place_order_text">Place order</string>
     <string name="title_activity_pay">PayActivity</string>
+    <string name="tip_button_text">Tip</string>
+    <string name="order_total_label">Your total:</string>
+    <string name="defaultOrderTotal">$0.00</string>
+    <string name="defaultNextText">Next</string>
+    <string name="title_activity_submit">SubmitActivity</string>
+    <string name="submit_button_text">Submit</string>
 
 </resources>

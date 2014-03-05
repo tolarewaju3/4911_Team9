@@ -12,6 +12,7 @@ import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.twilio.sdk.TwilioRestException;
 
 public class LoginActivity extends Activity {
 
@@ -43,11 +44,23 @@ public class LoginActivity extends Activity {
 				if(user != null) {
 //					completeLogin();
 					Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+					try {
+						SMSHandler.sendSMS("+14045198174", "Hello world!");
+					} catch (TwilioRestException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					startActivity(intent);
 
 				} else {
 					Toast.makeText(getApplicationContext(), "Login failed!", 5).show();
-//					toast.setView(getCurrentFocus());
+					try {
+						SMSHandler.sendSMS("+14045198174", "Hello world!");
+					} catch (TwilioRestException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					//					toast.setView(getCurrentFocus());
 //					toast.show();
 				}
 			}

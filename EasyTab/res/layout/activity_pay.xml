@@ -24,39 +24,44 @@
      </ListView>
 
      <Button
-         android:id="@+id/button1"
+         android:id="@+id/button_submit"
+         android:onClick="onPressSubmit"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_centerVertical="true"
-         android:layout_marginLeft="200dp"
+         android:layout_alignBottom="@+id/listView1"
+         android:layout_marginBottom="36dp"
+         android:layout_marginLeft="201dp"
          android:layout_toRightOf="@+id/listView1"
-         android:text="Button" />
+         android:text="@string/defaultNextText" />
 
-     <Button
-         android:id="@+id/button2"
+     <EditText
+         android:id="@+id/phoneNumberInput"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/button1"
-         android:layout_below="@+id/button1"
-         android:layout_marginTop="20dp"
-         android:text="Button" />
+         android:layout_alignLeft="@+id/orderTotalLabel"
+         android:layout_centerVertical="true"
+         android:ems="10"
+         android:inputType="phone" >
 
-     <Button
-         android:id="@+id/button3"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/button2"
-         android:layout_below="@+id/button2"
-         android:layout_marginTop="27dp"
-         android:text="Button" />
+         <requestFocus />
+     </EditText>
 
      <TextView
-         android:id="@+id/textView1"
+         android:id="@+id/orderTotalLabel"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_above="@+id/button1"
-         android:layout_alignLeft="@+id/button1"
-         android:layout_marginBottom="82dp"
-         android:text="TextView" />
+         android:layout_alignLeft="@+id/button_submit"
+         android:layout_alignTop="@+id/listView1"
+         android:layout_marginTop="66dp"
+         android:text="@string/order_total_label" />
+
+     <TextView
+         android:id="@+id/orderTotal"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/orderTotalLabel"
+         android:layout_below="@+id/orderTotalLabel"
+         android:layout_marginTop="39dp"
+         android:text="@string/defaultOrderTotal" />
      
 </RelativeLayout>

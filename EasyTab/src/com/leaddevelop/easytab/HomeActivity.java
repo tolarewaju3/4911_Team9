@@ -1,5 +1,7 @@
 package com.leaddevelop.easytab;
 
+import com.twilio.sdk.TwilioRestException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +28,7 @@ public class HomeActivity extends Activity {
 		return true;
 	}
 
-	public void onPressPay(View view) {
+	public void onPressPay(View view) throws TwilioRestException {
 		Intent intent = new Intent(this, PayActivity.class);
 		startActivity(intent);
 	}
