@@ -37,9 +37,6 @@ function delete_menu() {
 	var menuPointer = currentUser.get("Menu");
 	var menuID = menuPointer.id;
 
-	currentUser.unset("Menu");
-	currentUser.save();
-
 	var Menu = Parse.Object.extend("Menu");
 	var query = new Parse.Query(Menu);
 	query.get(menuID, {
@@ -47,8 +44,10 @@ function delete_menu() {
 			menuObject.destroy({
 				success: function(menuObject) {
 					alert("Menu deletion complete.");
+					currentUser.unset("Menu");
 					currentUser.set("hasMenu", false);
 					currentUser.save();
+					hasMenu = false;
 					window.location.replace("./mainmenu.html");
 				},
 				error: function(menuObject, error) {
