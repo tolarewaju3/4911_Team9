@@ -5,8 +5,8 @@ $(document).ready(function() {
 	var currentUser = Parse.User.current();
 	
 	if (currentUser) {
-		var hasMenu = currentUser.get("hasMenu");
-		if (hasMenu) {
+		var menu = currentUser.get("menu");
+		if (menu) {
 			$('.menu').html("Modify Menu");
 		} else {
 			$('.menu').html("Add Menu");
