@@ -22,8 +22,8 @@ $(document).ready(function() {
 			success: function(retrievedMenu) {
 				menu = retrievedMenu;
 				$('.menuNameField').val(menu.get("name"));
-					render_table();
-				}
+				render_table();
+			}
 		});
 	} 
 	else {
@@ -93,8 +93,9 @@ function setup_buttons() {
 			query: (new Parse.Query(Item)).containedIn("objectId", selectedIds)
 		});
 		var items = new ItemCollection();
-		delete_items(items);
-		render_table();
+		delete_items(selectedRows, items);
+		hide_item_remover();
+		show_action_panel();
 	});
 
 	$(".cancelRemove").click(function(e) {
@@ -111,7 +112,7 @@ function delete_menu() {
 		success: function(menuObject) {
 			currentUser.unset("menu");
 			var all_items = all_items_query().collection();
-			delete_items(all_items);
+			delete_items($(".itemRow"), all_items);
 			currentUser.save(null, {
 				success: function() {
 					alert("Menu deletion complete.");
@@ -125,11 +126,14 @@ function delete_menu() {
 	});
 }
 
-function delete_items(items) {
+function delete_items(rows, items) {
 	items.fetch({
 		success: function(items) {
-			items.forEach(function(item) {
-				item.destroy({});
+			while (items.length > 0) {
+				items.at(0).destroy({});
+			}
+			rows.each(function(i, row) {
+				remove_row($(row));
 			});
 		}
 	});
@@ -213,7 +217,7 @@ function add_item(name, price, description) {
 	item.set("menu", menu);
 	item.save(null, {
 		success: function(item) {
-			render_table();
+			render_item(item);
 		}
 	});
 }
@@ -228,11 +232,11 @@ function render_table() {
 	all_items.fetch({
 		success: function(items) {
 			if (items.length == 0) {
-				render_no_items(table);
+				render_no_items();
 			}
 
 			items.forEach(function(item){
-				render_item(table, item);
+				render_item(item);
 			});
 		}
 	});
@@ -244,15 +248,31 @@ function all_items_query() {
 	return query;
 }
 
-function render_item(table, item) {	
+function render_item(item) {	
+	if ($(".noItemsRow", $(".tableBody"))[0])
+	{
+		remove_no_items();
+	}
+
 	var itemRow = $(".itemRow", $(".templates")).clone().attr("data-parse-id", item.id);
 	$(".itemName", itemRow).text(item.get("name"));
 	$(".itemPrice", itemRow).text(item.get("price"));
 	$(".itemDescription", itemRow).text(item.get("description"));
-	table.append(itemRow);
+	$(".tableBody").append(itemRow);
 }
 
-function render_no_items(table) {
+function remove_row(row) {
+	row.remove();
+	if ($(".itemRow", $(".tableBody"))[0] == null) {
+		render_no_items();
+	}
+}
+
+function render_no_items() {
 	var noItemsRow = $(".noItemsRow", $(".templates")).clone();
-	table.append(noItemsRow);
+	$(".tableBody").append(noItemsRow);
+}
+
+function remove_no_items() {
+	$(".noItemsRow", $(".tableBody")).remove();
 }
