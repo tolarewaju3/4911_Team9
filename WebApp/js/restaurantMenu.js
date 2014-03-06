@@ -105,6 +105,54 @@ function setup_buttons() {
 		$(".deleteBox input").attr("checked", false);
 		show_action_panel();
 	});
+
+	$(".editItems").click(function(e) {
+		e.preventDefault();
+		hide_action_panel();
+		show_item_editor();
+		var cells = $(".itemRow td").not(".templates td, .deleteBox");
+		cells.each(function(i, cell) {
+			cell = $(cell)
+			cell.attr("data-default", cell.text());
+			cell.attr("contenteditable", "true");
+		});
+	});
+
+	$(".submitEdit").click(function(e) {
+		e.preventDefault();
+		var items = all_items_query().collection();
+		items.fetch({
+			success: function(items) {
+				items.each(function(item) {
+					var row = $(".itemRow[data-parse-id='" + item.id + "']");
+					item.set("name", $(".itemName", row).text());
+					item.set("price", $(".itemPrice", row).text());
+					item.set("description", $(".itemDescription", row).text());
+					item.save();
+				});
+			}
+		});
+		var cells = $(".itemRow td").not(".templates td, .deleteBox");
+		cells.each(function(i, cell) {
+			cell = $(cell);
+			cell.attr("data-default", cell.text());
+			cell.attr("contenteditable", "false");
+		});
+		hide_item_editor();
+		show_action_panel();
+	});
+
+	$(".cancelEdit").click(function(e) {
+		e.preventDefault();
+		var cells = $(".itemRow td").not(".templates td");
+		hide_item_editor();
+		show_action_panel();
+		cells.each(function(i, cell) {
+			cell = $(cell);
+			cell.text(cell.attr("data-default"));
+			cell.attr("contenteditable", "false");
+		});
+	});
 }
 
 function delete_menu() {
@@ -155,8 +203,9 @@ function create_new_menu() {
 	currentUser.save(null, {
 		success: function() {
 			$('.helperText').html("Now you need to add some items. Use the buttons on the right to add or remove items.");
-			$('.itemsTable').removeClass('hide');
-			$('.actionPanel').removeClass('hide');
+			render_table();
+			show_items_table();
+			show_action_panel();
 		},
 		error: function() {
 			displayFeedback(self, false, unknownErrorText);
@@ -207,6 +256,14 @@ function show_item_remover() {
 
 function hide_item_remover() {
 	$(".itemRemover").addClass('hide');
+}
+
+function show_item_editor() {
+	$(".itemEditor").removeClass('hide');
+}
+
+function hide_item_editor() {
+	$(".itemEditor").addClass('hide');
 }
 
 function add_item(name, price, description) {

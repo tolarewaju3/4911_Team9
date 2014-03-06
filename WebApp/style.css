@@ -108,4 +108,9 @@ footer {
 	color: red;
 }
 
+.itemRow td[contenteditable="true"] {
+	background-color: #FFFF99;
+	cursor: pointer;
+}
+
 /* Add/Edit Menu */
