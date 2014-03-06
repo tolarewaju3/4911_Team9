@@ -1,10 +1,16 @@
 var currentUser;
 var successfulChangeText = "Changes Saved Successfully!";
 var menu;
+var Item;
+var Menu;
 
 $(document).ready(function() {
 	
 	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");
+	
+	Item = Parse.Object.extend("Item");
+	Menu = Parse.Object.extend("Menu");
+
 	currentUser = Parse.User.current();
 	if (!currentUser) { window.location.replace("../");}
 
@@ -78,6 +84,17 @@ function setup_buttons() {
 	$(".submitRemove").click(function(e) {
 		e.preventDefault();
 		var selectedRows = $(".itemRow").not(".templates .itemRow").has(".deleteBox input:checked");
+		var selectedIds = [];
+		selectedRows.each(function(i, row) {
+			selectedIds.push(row.getAttribute("data-parse-id"));
+		});
+		var ItemCollection = Parse.Collection.extend({
+			model: Item,
+			query: (new Parse.Query(Item)).containedIn("objectId", selectedIds)
+		});
+		var items = new ItemCollection();
+		delete_items(items);
+		render_table();
 	});
 
 	$(".cancelRemove").click(function(e) {
@@ -123,7 +140,6 @@ function show_menu_edit_panels() {
 }
 
 function create_new_menu() {
-	var Menu = Parse.Object.extend("Menu");
 	var newMenu = new Menu();
 
 	newMenu.set('name', $('.menuNameField').val());
@@ -190,7 +206,6 @@ function hide_item_remover() {
 }
 
 function add_item(name, price, description) {
-	var Item = Parse.Object.extend("Item");
 	var item = new Item();
 	item.set("name", name);
 	item.set("price", price);
@@ -224,7 +239,6 @@ function render_table() {
 }
 
 function all_items_query() {
-	var Item = Parse.Object.extend("Item");
 	var query = new Parse.Query(Item);
 	query.equalTo("menu", menu);
 	return query;
