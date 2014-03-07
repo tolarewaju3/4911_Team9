@@ -65,6 +65,11 @@ footer {
 	color: rgb(223, 234, 240);
 }
 
+.light-green {
+	background-color: rgb(170, 217, 165);
+	color: rgb(84, 139, 156);
+}
+
 .helperText {
 	margin: 1em 0;
 }
@@ -113,4 +118,11 @@ footer {
 	cursor: pointer;
 }
 
-/* Add/Edit Menu */
+/* Add/Edit Restaurant Menu */
+.itemDescriptionField {
+	height: 95px;
+}
+
+.directions {
+	line-height: 1.5;
+}

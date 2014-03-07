@@ -18,7 +18,7 @@
 		</header>
 		<div class="main">
 			<div class="row">
-				<div class="large-6 columns">
+				<div class="large-8 columns">
 					<h1 class="title">Menu</h1>
 				</div>
 				<div class="large-4 columns">
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="large-6 columns">
+				<div class="large-8 columns">
 					<form class="menuNameForm">
 						<div class="row bump">
 							<div class="large-10 columns">
@@ -52,7 +52,7 @@
 							<table width="100%">
 								<thead>
 									<th class="deleteBox hide"></th>
-									<th width="100">Menu Item</th>
+									<th width="120">Menu Item</th>
 									<th width="100">Price</th>
 									<th>Description</th>
 								</thead>
@@ -62,75 +62,88 @@
 						</div>
 					</div>
 				</div>
-				<div class="large-6 columns actionPanel hide bump">
+				<div class="large-4 columns actionPanel hide bump">
 					<div class="row">
-						<div class="large-7 large-centered card columns">
-							<a class="btn addItem" href="#">Add Item</a>
+						<div class="large-7 large-centered columns">
+							<a class="btn addItem dark-blue" href="#">Add Item</a>
 						</div>
 					</div>
-					<div class="row">
-						<div class="large-7 large-centered card columns">
-							<a class="btn editItems" href="#">Edit Items</a>
+					<div class="row bump">
+						<div class="large-7 large-centered columns">
+							<a class="btn editItems dark-blue" href="#">Edit Items</a>
 						</div>
 					</div>
-					<div class="row">
-						<div class="large-7 large-centered card columns">
-							<a class="btn removeItems" href="#">Remove Items</a>
+					<div class="row bump">
+						<div class="large-7 large-centered columns">
+							<a class="btn removeItems dark-blue" href="#">Remove Items</a>
 						</div>
 					</div>
-					<div class="row">
-						<div class="large-6 column">
+					<div class="row bump">
+						<div class="large-7 large-centered columns ">
 							<a class="btn deleteMenu">Discard Menu</a>
 						</div>
 					</div>
 				</div>
-				<div class="large-6 columns itemAdder hide">
+				<div class="large-4 columns itemAdder hide">
 					<form class="itemForm">
-						<div class="row bump">
-							<div class="large-10 columns">
+						<div class="row">
+							<div class="column">
+								<h3>Add Item</h3>
 								<label>Item Name</label>
 								<input type="text" name="itemName" class="itemNameField" placeholder="Ex. Pancakes">
 							</div>
 						</div>
-						<div class="row bump">
-							<div class="large-10 columns">
+						<div class="row">
+							<div class="column">
 								<label>Item Price</label>
 								<input type="text" name="itemPrice" class="itemPriceField" placeholder="Ex. 6.25">
 							</div>
 						</div>
-						<div class="row bump">
-							<div class="large-10 columns">
+						<div class="row">
+							<div class="column">
 								<label>Item Description</label>
-								<input type="text" name="itemDescription" class="itemDescriptionField" placeholder="Ex. Crazy awesome pancakes topped with maple syrup">
+								<textarea type="text" name="itemDescription" class="itemDescriptionField" placeholder="Ex. Crazy awesome pancakes topped with maple syrup"></textarea>
 							</div>
 						</div>
 						<div class="row">
-							<div class="large-4 column">
+							<div class="large-6 column">
 								<input type="submit" value="Save Item" class="btn submitItem">
 							</div>
-							<div class="large-4 column">
+							<div class="large-6 column">
 								<input type="submit" value="Back" class="btn cancelItem">
 							</div>
 						</div>
 						<div class="feedback"></div>
 					</form>
 				</div>
-				<div class="large-6 columns itemRemover hide">
+				<div class="large-4 columns itemRemover hide">
 					<div class="row">
-						<div class="large-4 columns">
+						<div class="column directions">
+							<h3>Remove Items</h3>
+							Select the rows in which you wish to delete.
+						</div>
+					</div>
+					<div class="row bump">
+						<div class="large-7 columns">
 							<a class="btn submitRemove" href="#">Remove Selected</a>
 						</div>
-						<div class="large-4 columns">
+						<div class="large-5 columns">
 							<a class="btn cancelRemove" href="#">Back</a>
 						</div>
 					</div>
 				</div>
-				<div class="large-6 columns itemEditor hide">
+				<div class="large-4 columns itemEditor hide">
 					<div class="row">
-						<div class="large-4 columns">
+						<div class="column directions">
+							<h3>Edit Items</h3>
+							The table on the right is now editable. Feel free to revise any text or prices. To discard your changes, hit the back button below.
+						</div>
+					</div>
+					<div class="row bump">
+						<div class="large-6 columns">
 							<a class="btn submitEdit" href="#">Save</a>
 						</div>
-						<div class="large-4 columns">
+						<div class="large-6 columns">
 							<a class="btn cancelEdit" href="#">Back</a>
 						</div>
 					</div>

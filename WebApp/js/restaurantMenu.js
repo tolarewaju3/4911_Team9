@@ -17,6 +17,7 @@ $(document).ready(function() {
 	var retrievedMenu = currentUser.get("menu");
 	if (retrievedMenu) {
 		$('.title').html("Modify Menu");
+		$('.helperText').html("Welcome back ! Modify your restaurant menu here.")
 		show_menu_edit_panels();
 		retrievedMenu.fetch({
 			success: function(retrievedMenu) {
