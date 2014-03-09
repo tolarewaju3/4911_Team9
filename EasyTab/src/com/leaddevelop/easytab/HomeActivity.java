@@ -1,7 +1,5 @@
 package com.leaddevelop.easytab;
 
-import com.twilio.sdk.TwilioRestException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +11,7 @@ public class HomeActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		Parse.initialize(this, "X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "oNXU5Lz9lfgEiFafCil80dUAXJJjIFW3EVhUN8BF");
 		setContentView(R.layout.activity_home);
-		
-//		ParseObject testObject = new ParseObject("TestObject");
-//		testObject.put("foo", "bar");
-//		testObject.saveInBackground();
 	}
 
 	@Override
@@ -28,7 +21,7 @@ public class HomeActivity extends Activity {
 		return true;
 	}
 
-	public void onPressPay(View view) throws TwilioRestException {
+	public void onPressPay(View view) {
 		Intent intent = new Intent(this, PayActivity.class);
 		startActivity(intent);
 	}
