@@ -8,10 +8,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.parse.Parse;
+
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -20,9 +25,11 @@ import com.parse.ParseRelation;
 
 
 public class PayActivity extends Activity {
-	
+	List<ParseObject> itemObjects;
+	List<ParseObject> selectedItems;
 	ArrayList<String> orderItems;
 	ArrayAdapter<String> adapter;
+	int price;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +37,34 @@ public class PayActivity extends Activity {
 		setContentView(R.layout.activity_pay);
 		
 		orderItems = new ArrayList<String>();
+		itemObjects = new ArrayList<ParseObject>();
+		selectedItems = new ArrayList<ParseObject>();
+		price = 0;
 		getTableOrder(0); // Fix this -- Get the table number from our "Settings"
 		
 		ListView listView1 = (ListView) findViewById(R.id.listView1);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, orderItems);       
         listView1.setAdapter(adapter);
+        
+        listView1.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				CheckedTextView textView = (CheckedTextView)view;
+				
+                ParseObject orderItem = itemObjects.get(position);
+                if(textView.isChecked()){
+                	selectedItems.remove(position);
+                }
+                else{
+                	selectedItems.add(orderItem);
+                }
+                
+                textView.setChecked(!textView.isChecked());
+                updatePrice();
+			}
+        });
+        
 	}
 
 	@Override
@@ -67,14 +97,26 @@ public class PayActivity extends Activity {
 		      if (e != null) {
 		        // There was an error
 		      } else {
-		        orderItems.clear();
+		    	itemObjects = itemList;
+		    	orderItems.clear();
 		        for (ParseObject item : itemList) {
-					orderItems.add(item.getString("name"));
+		        	String price = "[$" + item.getInt("price") + ".00]";
+					orderItems.add(item.getString("name") + " " + price);
 				}
 				adapter.notifyDataSetChanged();
 		      }
 		    }
 		});
+	}
+	
+	public void updatePrice(){
+		price = 0;
+		for (ParseObject selectedItem : selectedItems){
+			price += selectedItem.getInt("price");
+		}
+		
+		TextView orderTotal = (TextView) findViewById(R.id.orderTotal);
+		orderTotal.setText("$" + price + ".00");
 	}
 	
 	public void onPressSubmit(View view) {
