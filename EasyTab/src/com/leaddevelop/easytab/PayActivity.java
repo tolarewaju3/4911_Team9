@@ -54,7 +54,7 @@ public class PayActivity extends Activity {
 				
                 ParseObject orderItem = itemObjects.get(position);
                 if(textView.isChecked()){
-                	selectedItems.remove(position);
+                	selectedItems.remove(orderItem);
                 }
                 else{
                 	selectedItems.add(orderItem);
@@ -113,6 +113,7 @@ public class PayActivity extends Activity {
 		price = 0;
 		for (ParseObject selectedItem : selectedItems){
 			price += selectedItem.getInt("price");
+			System.out.println(selectedItem.get("name"));
 		}
 		
 		TextView orderTotal = (TextView) findViewById(R.id.orderTotal);
