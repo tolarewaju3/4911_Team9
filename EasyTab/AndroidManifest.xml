@@ -41,6 +41,15 @@
             android:label="@string/title_activity_submit"
             android:screenOrientation="landscape" >
         </activity>
+        <activity
+            android:name="com.leaddevelop.easytab.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="com.leaddevelop.easytab.HomeActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.leaddevelop.easytab.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

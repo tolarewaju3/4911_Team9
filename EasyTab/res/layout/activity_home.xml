@@ -36,6 +36,7 @@
         android:layout_alignRight="@+id/pay_now_button"
         android:layout_below="@+id/pay_now_button"
         android:layout_marginTop="18dp"
+        android:onClick="onPressSettings"
         android:text="@string/settings_text" />
 
 </RelativeLayout>
