@@ -1,0 +1,149 @@
+var currentUser;
+var Order;
+var user;
+var orders;
+
+$(document).ready(function() {
+	
+	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");
+	
+	Order = Parse.Object.extend("Order");
+	currentUser = Parse.User.current();
+	if (!currentUser) { window.location.replace("../");}
+
+	user = Parse.User.current();
+	var retrievedOrders = all_orders_query().collection();
+	if (retrievedOrders) {
+		retrievedOrders.fetch({
+			success: function(retrievedOrders) {
+				orders = retrievedOrders;
+				render_table();
+			}
+		});
+	}
+
+	$(document).on("click", ".orderRow", function() {
+		var query = new Parse.Query(Order);		
+		query.get($(this).data("parse-id"), {
+		  	success: function(order) {
+			  	order.fetch({
+			  		success: function(order) {
+						var relation = order.relation("items");
+						relation.query().find({
+							success: function(itemsList) {
+								if (itemsList.length == 0) {
+									render_no_items();
+								} else {
+									render_order_details(itemsList, order);
+								}
+							}
+						});
+					}
+				});
+		  	}
+		});
+	})
+
+	$(document).on("click", ".cta-button", function(e) {
+		e.preventDefault();
+		$(".orderDetails").empty();
+	})
+});
+
+function render_order_details(items, order) {
+	var orderDetails = $(".orderDetails");
+	orderDetails.empty();
+	var subtotal = 0.00;
+	
+	var itemList = $(".pricing-table", $(".templates")).clone();
+	
+	items.forEach(function(item) {
+		subtotal += item.get("price");
+
+		var listItem = $(".bullet-item", $(".templates")).clone();
+		$(".itemName", listItem).text(item.get("name"));
+		$(".itemPrice", listItem).text("$" + item.get("price"));
+
+		itemList.append(listItem);
+	});
+
+	var closeBtn = $(".cta-button", $(".templates")).clone();
+	itemList.append(closeBtn);
+
+	$(".description", itemList).text(order.id);
+	$(".price", itemList).text("$" + subtotal);
+
+	orderDetails.append(itemList);
+}
+
+function render_table() {
+	var table = $('.tableBody');
+	table.empty();
+
+	if (orders.length == 0) {
+		render_no_orders();
+	} else {
+		orders.forEach(function(order){
+			render_order(order);
+		});
+	}
+}
+
+function all_orders_query() {
+	var query = new Parse.Query(Order);
+	query.equalTo("user", user);
+	query.descending("createdAt");
+	return query;
+}
+
+function render_order(order) {
+	var orderRow = $(".orderRow", $(".templates")).clone().attr("data-parse-id", order.id);
+	$(".orderID", orderRow).text(order.id);
+	$(".orderDateTime", orderRow).text(render_order_date_time(order.createdAt));
+	$(".orderTableNum", orderRow).text(order.get("tableNumber"));
+	$(".orderStatus", orderRow).html(render_order_status(order.get("paid")));
+	
+	$(".tableBody").append(orderRow);
+}
+
+function render_no_orders() {
+	var noOrdersRow = $(".noOrdersRow", $(".templates")).clone();
+	$(".tableBody").append(noOrdersRow);
+}
+
+function render_no_items() {
+	var orderDetails = $(".orderDetails");
+	orderDetails.empty();
+
+	var itemList = $(".pricing-table", $(".templates")).clone();
+	$(".description", itemList).text("That's not good. We found no items for this order. Try again later.");
+	var closeBtn = $(".cta-button", $(".templates")).clone();
+	itemList.append(closeBtn);
+	orderDetails.append(itemList);
+}
+
+function remove_no_orders() {
+	$(".noOrdersRow", $(".tableBody")).remove();
+}
+
+function render_order_status(isPaid) {
+	if (isPaid) {
+		return $(".paid", $(".templates")).clone();
+	} else {
+		return $(".unpaid", $(".templates")).clone();
+	}
+}
+
+function render_order_date_time(dateObj) {
+	var date = $.datepicker.formatDate("DD, MM d, yy", dateObj);
+	
+	var hours = dateObj.getHours();
+	var minutes = dateObj.getMinutes();
+	var ampm = hours >= 12 ? 'pm' : 'am';
+	hours = hours % 12;
+	hours = hours ? hours : 12; 
+	minutes = minutes < 10 ? '0' + minutes : minutes;
+	var time = hours + ':' + minutes + ' ' + ampm;
+	
+	return date + " " + time;
+}

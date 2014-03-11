@@ -72,6 +72,7 @@ footer {
 
 .helperText {
 	margin: 1em 0;
+	line-height: 1.5;
 }
 
 /* Defining colors */
@@ -113,6 +114,14 @@ footer {
 	color: red;
 }
 
+.paid {
+	color: green;
+}
+
+.unpaid {
+	color: red;
+}
+
 .itemRow td[contenteditable="true"] {
 	background-color: #FFFF99;
 	cursor: pointer;
@@ -125,4 +134,10 @@ footer {
 
 .directions {
 	line-height: 1.5;
+}
+
+/* View Order */
+.orderRow:hover {
+	background-color: rgb(188, 216, 227);
+	cursor: pointer;
 }

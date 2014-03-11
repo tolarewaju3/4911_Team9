@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" href="css/foundation.css" />	
+		
+		<script src="js/vendor/modernizr.js"></script>
+		<script src="http://www.parsecdn.com/js/parse-1.2.16.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		
+		<script type="text/javascript" src="js/orders.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>EasyTab 0.5</h1>
+		</header>
+		<div class="main">
+			<div class="row">
+				<div class="large-8 columns">
+					<h1>View Orders</h1>
+				</div>
+				<div class="large-4 columns">
+					<a class="btn dark-blue" href="./mainmenu.html">Back to Main Menu</a>
+				</div>
+			</div>
+			<div class="row bump">
+				<div class="large-6 column directions">
+					Here is your complete order. Open orders are marked with a red note showing a payment has not yet been completed. Click on an order to view order details.
+				</div>
+			</div>
+			<div class="row bump">
+				<div class="large-8 columns">
+					<div class="row bump itemsTable">
+						<div class="column">
+							<table width="100%">
+								<thead>
+									<th class="deleteBox hide"></th>
+									<th width="120">Order Number</th>
+									<th>Date Order Placed</th>
+									<th width="120">Table Number</th>
+									<th>Status</th>
+								</thead>
+								<tbody class="tableBody">
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="large-4 columns">
+					<div class="row">
+						<div class="large-centered column orderDetails">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<img src="http://placehold.it/800x200">
+		</footer>
+		<div class="templates hide">
+			<table>
+				<tr class="orderRow">
+					<td class="orderID"></td>
+					<td class="orderDateTime"></td>
+					<td class="orderTableNum"></td>
+					<td class="orderStatus"></td>
+				</tr>
+				<tr class="noOrdersRow">
+					<td colspan="4">No orders have been placed.</td>
+				</tr>
+			</table>
+
+			<ul class="pricing-table"> 
+				<li class="title">Order Details</li> 
+				<li class="price"></li>
+				<li class="description"></li>
+			</ul>
+			
+			<li class="bullet-item">
+				<div class="row">
+					<div class="large-6 small-6 columns itemName text-left">
+					</div>
+					<div class="large-6 small-6 columns itemPrice text-right">
+					</div>
+				</div>
+			</li>
+			<li class="cta-button"><a class="button">Close</a></li>
+
+			<div class="paid">Paid</div>
+			<div class="unpaid">Unpaid</div>
+		</div>
+	</body>
+</html>
