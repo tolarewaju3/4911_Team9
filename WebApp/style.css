@@ -128,28 +128,22 @@ footer {
 }
 
 /* Add/Edit Restaurant Menu */
-.itemDescriptionField {
-	height: 95px;
-}
+.itemDescriptionField { height: 95px;}
 
-.directions {
-	line-height: 1.5;
-}
+.directions { line-height: 1.5; }
 
-.itemsTable > div.column > table {
-    width: 100%;
-}
+.itemsTable > div.column > table { width: 100%; }
 
-thead > tr > th.tableMenuItem {
-    width: 120px;
-}
-
-thead > tr > th.tableItemPrice {
-    width: 100px;
-}
+thead > tr > th.tableMenuItem { width: 120px; }
+thead > tr > th.tableItemPrice { width: 100px; }
 
 /* View Order */
 .orderRow:hover {
 	background-color: rgb(188, 216, 227);
 	cursor: pointer;
 }
+
+.orderTable > div.column > table { width: 100%; }
+
+thead > tr > th.tableOrderNum { width: 120px; }
+thead > tr > th.tableOrderTableNum { width: 120px; }
