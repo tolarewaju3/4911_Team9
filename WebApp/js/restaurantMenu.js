@@ -67,7 +67,7 @@ function setup_buttons() {
 		hide_item_adder();
 
 		var itemName = $(".itemNameField").val();
-		var itemPrice = $(".itemPriceField").val();
+		var itemPrice = parseFloat($(".itemPriceField").val());
 		var itemDescription = $(".itemDescriptionField").val();
 
 		add_item(itemName, itemPrice, itemDescription);
@@ -127,7 +127,7 @@ function setup_buttons() {
 				items.each(function(item) {
 					var row = $(".itemRow[data-parse-id='" + item.id + "']");
 					item.set("name", $(".itemName", row).text());
-					item.set("price", $(".itemPrice", row).text());
+					item.set("price", parseFloat($(".itemPrice", row).text()));
 					item.set("description", $(".itemDescription", row).text());
 					item.save();
 				});
