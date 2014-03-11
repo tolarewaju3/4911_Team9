@@ -136,6 +136,18 @@ footer {
 	line-height: 1.5;
 }
 
+.itemsTable > div.column > table {
+    width: 100%;
+}
+
+thead > tr > th.tableMenuItem {
+    width: 120px;
+}
+
+thead > tr > th.tableItemPrice {
+    width: 100px;
+}
+
 /* View Order */
 .orderRow:hover {
 	background-color: rgb(188, 216, 227);

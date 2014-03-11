@@ -16,7 +16,8 @@ $(document).ready(function() {
 
 	var retrievedMenu = currentUser.get("menu");
 	if (retrievedMenu) {
-		$('.title').html("Modify Menu");
+	    $('.title').html("Modify Menu");
+	    $('title').append(" | Modify Menu");
 		$('.helperText').html("Welcome back ! Modify your restaurant menu here.")
 		show_menu_edit_panels();
 		retrievedMenu.fetch({
@@ -29,6 +30,7 @@ $(document).ready(function() {
 	} 
 	else {
 		$('.title').html("Add Menu");
+		$('title').append(" | Add Menu");
 	}
 
 	setup_buttons();
