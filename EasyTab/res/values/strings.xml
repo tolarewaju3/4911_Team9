@@ -19,5 +19,6 @@
     <string name="defaultNextText">Next</string>
     <string name="title_activity_submit">SubmitActivity</string>
     <string name="submit_button_text">Submit</string>
+    <string name="title_activity_order">OrderActivity</string>
 
 </resources>

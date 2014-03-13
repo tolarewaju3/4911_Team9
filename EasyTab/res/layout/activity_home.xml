@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/pay_now_button"
         android:layout_centerHorizontal="true"
+        android:onClick="onPressOrder"
         android:layout_marginBottom="18dp"
         android:text="@string/place_order_text" />
 

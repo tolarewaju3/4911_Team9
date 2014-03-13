@@ -20,6 +20,11 @@ public class HomeActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	public void onPressOrder(View view) {
+		Intent intent = new Intent(this, OrderActivity.class);
+		startActivity(intent);
+	}
 
 	public void onPressPay(View view) {
 		Intent intent = new Intent(this, PayActivity.class);

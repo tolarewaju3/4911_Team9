@@ -50,6 +50,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.leaddevelop.easytab.HomeActivity" />
         </activity>
+        <activity
+            android:name="com.leaddevelop.easytab.OrderActivity"
+            android:label="@string/title_activity_order"
+            android:parentActivityName="com.leaddevelop.easytab.HomeActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.leaddevelop.easytab.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
