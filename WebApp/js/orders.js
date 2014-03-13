@@ -18,37 +18,83 @@ $(document).ready(function() {
 			success: function(retrievedOrders) {
 				orders = retrievedOrders;
 				render_table();
+				render_order_details_cards();
 			}
 		});
 	}
 
 	$(document).on("click", ".orderRow", function() {
-		var query = new Parse.Query(Order);		
-		query.get($(this).data("parse-id"), {
-		  	success: function(order) {
-			  	order.fetch({
-			  		success: function(order) {
-						var relation = order.relation("items");
-						relation.query().find({
-							success: function(itemsList) {
-								if (itemsList.length == 0) {
-									render_no_items();
-								} else {
-									render_order_details(itemsList, order);
-								}
-							}
-						});
-					}
-				});
-		  	}
-		});
+		var orderID = $(this).data("parse-id");
+		var orderDetails = $(".orderDetails");
+		var itemsListDetails = orderDetails.find(".pricing-table[data-parse-id=" + orderID);
+		itemsListDetails.removeClass("hide");
+		// var query = new Parse.Query(Order);		
+		// query.get($(this).data("parse-id"), {
+		//   	success: function(order) {
+		// 	  	order.fetch({
+		// 	  		success: function(order) {
+		// 				var relation = order.relation("items");
+		// 				relation.query().find({
+		// 					success: function(itemsList) {
+		// 						if (itemsList.length == 0) {
+		// 							render_no_items();
+		// 						} else {
+		// 							render_order_details(itemsList, order);
+		// 						}
+		// 					}
+		// 				});
+		// 			}
+		// 		});
+		//   	}
+		// });
 	})
 
 	$(document).on("click", ".cta-button", function(e) {
-		e.preventDefault();
-		$(".orderDetails").empty();
+		var itemsListDetails = $(this).closest(".pricing-table");
+		itemsListDetails.addClass("hide");
+		// e.preventDefault();
+		// $(".orderDetails").empty();
 	})
 });
+
+function render_order_details_cards() {
+	var orderDetails = $(".orderDetails");
+
+	orders.forEach(function(order) {
+		var relation = order.relation("items");
+		relation.query().find({
+			success: function(items) {
+				var itemList = $(".pricing-table", $(".templates")).clone();
+				var closeBtn = $(".cta-button", $(".templates")).clone();
+				
+				if (items.length == 0) {
+					$(".description", itemList).text("That's no good. We found no items for this order. Try again later.");
+					itemList.append(closeBtn);
+				} else {
+					var subtotal = 0.00;
+					items.forEach(function(item) {
+						subtotal += item.get("price");
+
+						var listItem = $(".bullet-item", $(".templates")).clone();
+						$(".itemName", listItem).text(item.get("name"));
+						$(".itemPrice", listItem).text("$" + item.get("price"));
+
+						itemList.append(listItem);
+					});
+
+					itemList.append(closeBtn);
+
+					$(".description", itemList).text(order.id);
+					$(".price", itemList).text("$" + subtotal);
+				}
+
+				itemList.data("order-id", order.id);
+				itemList.addClass("hide");
+				orderDetails.append(itemList);
+			}
+		});
+	});
+}
 
 function render_order_details(items, order) {
 	var orderDetails = $(".orderDetails");
@@ -97,7 +143,7 @@ function all_orders_query() {
 }
 
 function render_order(order) {
-	var orderRow = $(".orderRow", $(".templates")).clone().attr("data-parse-id", order.id);
+	var orderRow = $(".orderRow", $(".templates")).clone().data("order-id", order.id);
 	$(".orderID", orderRow).text(order.id);
 	$(".orderDateTime", orderRow).text(render_order_date_time(order.createdAt));
 	$(".orderTableNum", orderRow).text(order.get("tableNumber"));
