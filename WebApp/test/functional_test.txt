@@ -49,3 +49,29 @@ OUTPUT: all fields, except "password", should contain values corresponding to th
 INPUT: clear text from all fields
 INPUT: repeat the entire "signup" test shown above, replacing the "Sign Up" button with the "Save Changes Button"
 OUTPUT: all outputs should be the same as in the "signup" test, except the last output should be a positive feedback message instead of a redirect
+
+// Test the menu edit page
+INPUT: click the menu name field
+INPUT: enter a new name into the field
+INPUT: click the save menu name button
+EXPECTED OUTPUT: an alert should appear saying the changes were made sucessfully
+INPUT: click the add menu button
+EXPECTED OUTPUT: a form that allows the user to enter an item should appear
+INPUT: fill all fields in add item form, click save item
+EXPECTED OUTPUT: the item should appear in the table to the left
+INPUT: click edit items button
+INPUT: click on table field column and edit the text
+INPUT: click save button
+EXPECTED OUTPUT: the field that was edited will remain
+INPUT: click remove items button
+INPUT: click any checkbox of item in far left column
+INPUT: click remove selected button
+EXPECTED OUTPUT: the item checked should disappear from view.
+INPUT: click discard menu button
+EXPECTED OUTPUT: the menu will be deleted from view, and the menu start form should appear
+
+// Test view orders page
+INPUT: click order row
+EXPECTED OUTPUT: a dialog should appear on the right
+INPUT: click close button
+EXPECTED OUTPUT: the dialog should disappear from view
