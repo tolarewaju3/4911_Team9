@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "EasyTab": {
+            "applicationId": "X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", 
+            "masterKey": "m4fl3u6kuCWOpnKN9eX51IOGE0OEAmGqVRPhWiCi"
+        }, 
+        "_default": {
+            "link": "EasyTab"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.17"
+    }
+}
