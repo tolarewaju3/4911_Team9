@@ -9,6 +9,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
@@ -32,6 +35,8 @@ public class OrderActivity extends Activity {
 	ArrayList<String> orderItems;
 	ArrayAdapter<String> adapter;
 	int price;
+	
+	ParseObject menu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +79,7 @@ public class OrderActivity extends Activity {
 	// Get the menu for this restaurant
 	public void getMenuItems(){ 
 		ParseUser user = ParseUser.getCurrentUser();
-		ParseObject menu = user.getParseObject("menu");
+		menu = user.getParseObject("menu");
 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Item");
 		query.whereEqualTo("menu", menu);
@@ -98,25 +103,6 @@ public class OrderActivity extends Activity {
 		this.itemObjects = menuItems;
 		adapter.notifyDataSetChanged();
 	}
-
-//	public void getOrderItems(ParseObject order){
-//		ParseRelation<ParseObject> itemsFromOrder = order.getRelation("items");
-//		itemsFromOrder.getQuery().findInBackground(new FindCallback<ParseObject>() {
-//			public void done(List<ParseObject> itemList, ParseException e) {
-//				if (e != null) {
-//					// There was an error
-//				} else {
-//					itemObjects = itemList;
-//					orderItems.clear();
-//					for (ParseObject item : itemList) {
-//						String price = "[$" + item.getInt("price") + ".00]";
-//						orderItems.add(item.getString("name") + " " + price);
-//					}
-//					adapter.notifyDataSetChanged();
-//				}
-//			}
-//		});
-//	}
 
 	public void updatePrice(){
 		price = 0;
@@ -165,7 +151,39 @@ public class OrderActivity extends Activity {
 
 	public void onPressSubmit(View view) {
 		// do something
-		ParseObject order = new ParseObject("Order");
+		submitOrder();
+	}
+	
+	public void submitOrder(){
+		if(menu != null){
+			ParseUser user = ParseUser.getCurrentUser();
+			ParseObject order = new ParseObject("Order");
+			order.put("user", user);
+			order.put("paid", false);
+			order.put("tableNumber", 0); // Fix this -- currently hard coding table number
+			
+			ParseRelation<ParseObject> items = order.getRelation("items");
+			
+			for(ParseObject item : selectedItems) {
+				items.add(item);
+			}
+			
+			order.saveInBackground(new SaveCallback(){
+
+				@Override
+				public void done(ParseException e) {
+					if(e == null){
+						Toast.makeText(getApplicationContext(), "Order Submitted!", 5).show();
+						finish();
+					}
+					else{
+						Toast.makeText(getApplicationContext(), "Submitting Order Failed!", 5).show();
+					}
+					
+				}
+				
+			});
+		}
 	}
 
 }
