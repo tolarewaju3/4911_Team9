@@ -26,7 +26,9 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 public class OrderActivity extends Activity {
 
@@ -154,13 +156,16 @@ public class OrderActivity extends Activity {
 		submitOrder();
 	}
 	
-	public void submitOrder(){
+	public void submitOrder(){	
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		int tableNumber = Integer.parseInt(sharedPref.getString("table_num", ""));
+		
 		if(menu != null){
 			ParseUser user = ParseUser.getCurrentUser();
 			ParseObject order = new ParseObject("Order");
 			order.put("user", user);
 			order.put("paid", false);
-			order.put("tableNumber", 0); // Fix this -- currently hard coding table number
+			order.put("tableNumber", tableNumber); // Fix this -- currently hard coding table number
 			
 			ParseRelation<ParseObject> items = order.getRelation("items");
 			

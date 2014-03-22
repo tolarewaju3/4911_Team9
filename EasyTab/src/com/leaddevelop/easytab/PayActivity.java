@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,7 +42,7 @@ public class PayActivity extends Activity {
 		itemObjects = new ArrayList<ParseObject>();
 		selectedItems = new ArrayList<ParseObject>();
 		price = 0;
-		getTableOrder(0); // Fix this -- Get the table number from our "Settings"
+		getTableOrder();
 		
 		ListView listView1 = (ListView) findViewById(R.id.listView1);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, orderItems);       
@@ -75,14 +77,20 @@ public class PayActivity extends Activity {
 	}
 	
 	// Get the unpaid order for this table that hasn't been paid
-	public void getTableOrder(int tableNumber){ 
+	public void getTableOrder(){ 
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+		int tableNumber = Integer.parseInt(sharedPref.getString("table_num", ""));
+		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
 		query.whereEqualTo("tableNumber", tableNumber);
-		query.whereDoesNotExist("paid");
+		query.whereEqualTo("paid", false);
 		query.findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> tableOrders, ParseException e) {
 		        if (e == null) {
-		        	getOrderItems(tableOrders.get(0));
+		        	if(tableOrders.size() != 0)
+		        		getOrderItems(tableOrders.get(0));
+		        	else
+		        		noTableOrders();
 		        } else {
 		        	
 		        }
@@ -118,6 +126,11 @@ public class PayActivity extends Activity {
 		
 		TextView orderTotal = (TextView) findViewById(R.id.orderTotal);
 		orderTotal.setText("$" + price + ".00");
+	}
+	
+	public void noTableOrders(){
+		Toast.makeText(getApplicationContext(), "No Open Orders!", 5).show();
+		finish();
 	}
 	
 	public void onPressSubmit(View view) {
