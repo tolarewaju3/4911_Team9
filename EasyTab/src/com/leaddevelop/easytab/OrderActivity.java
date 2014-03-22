@@ -32,93 +32,102 @@ public class OrderActivity extends Activity {
 	ArrayList<String> orderItems;
 	ArrayAdapter<String> adapter;
 	int price;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
+
 		orderItems = new ArrayList<String>();
 		itemObjects = new ArrayList<ParseObject>();
 		selectedItems = new ArrayList<ParseObject>();
 		price = 0;
-//		getTableOrder(0); // Fix this -- Get the table number from our "Settings"
-		
+		getMenuItems(); // Fix this -- Get the table number from our "Settings"
+
 		ListView listView1 = (ListView) findViewById(R.id.listView1);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, orderItems);       
-        listView1.setAdapter(adapter);
-        
-        listView1.setOnItemClickListener(new OnItemClickListener() {
+		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, orderItems);       
+		listView1.setAdapter(adapter);
+
+		listView1.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				CheckedTextView textView = (CheckedTextView)view;
-				
-                ParseObject orderItem = itemObjects.get(position);
-                if(textView.isChecked()){
-                	selectedItems.remove(orderItem);
-                }
-                else{
-                	selectedItems.add(orderItem);
-                }
-                
-                textView.setChecked(!textView.isChecked());
-                updatePrice();
+
+				ParseObject orderItem = itemObjects.get(position);
+				if(textView.isChecked()){
+					selectedItems.remove(orderItem);
+				}
+				else{
+					selectedItems.add(orderItem);
+				}
+
+				textView.setChecked(!textView.isChecked());
+				updatePrice();
 			}
-        });
-    
+		});
+
 	}
-	
+
 	// Get the menu for this restaurant
-		public void getTableOrder(int tableNumber){ 
-			ParseUser user = ParseUser.getCurrentUser();
-//			user.
-//			ParseObject menu = user.getObjectId("menu");
-			ParseQuery<ParseObject> query = ParseQuery.getQuery("Item");
-			query.whereEqualTo("tableNumber", tableNumber);
-			query.whereDoesNotExist("paid");
-			query.findInBackground(new FindCallback<ParseObject>() {
-			    public void done(List<ParseObject> tableOrders, ParseException e) {
-			        if (e == null) {
-			        	getOrderItems(tableOrders.get(0));
-			        } else {
-			        	
-			        }
-			    }
-			});
-		}
-		
-		public void getOrderItems(ParseObject order){
-			ParseRelation<ParseObject> itemsFromOrder = order.getRelation("items");
-			itemsFromOrder.getQuery().findInBackground(new FindCallback<ParseObject>() {
-			    public void done(List<ParseObject> itemList, ParseException e) {
-			      if (e != null) {
-			        // There was an error
-			      } else {
-			    	itemObjects = itemList;
-			    	orderItems.clear();
-			        for (ParseObject item : itemList) {
-			        	String price = "[$" + item.getInt("price") + ".00]";
-						orderItems.add(item.getString("name") + " " + price);
-					}
-					adapter.notifyDataSetChanged();
-			      }
-			    }
-			});
-		}
-		
-		public void updatePrice(){
-			price = 0;
-			for (ParseObject selectedItem : selectedItems){
-				price += selectedItem.getInt("price");
-				System.out.println(selectedItem.get("name"));
+	public void getMenuItems(){ 
+		ParseUser user = ParseUser.getCurrentUser();
+		ParseObject menu = user.getParseObject("menu");
+
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Item");
+		query.whereEqualTo("menu", menu);
+
+		query.findInBackground(new FindCallback<ParseObject>() {
+			public void done(List<ParseObject> menuItems, ParseException e) {
+				if (e == null) {
+					listMenuItems(menuItems);
+				} else {
+
+				}
 			}
-			
-			TextView orderTotal = (TextView) findViewById(R.id.orderTotal);
-			orderTotal.setText("$" + price + ".00");
+		});
+	}
+
+	public void listMenuItems(List<ParseObject> menuItems) {
+		for(ParseObject item : menuItems) {
+			String price = "[$" + item.getInt("price") + ".00]";
+			orderItems.add(item.getString("name") + " " + price);
 		}
+		this.itemObjects = menuItems;
+		adapter.notifyDataSetChanged();
+	}
+
+//	public void getOrderItems(ParseObject order){
+//		ParseRelation<ParseObject> itemsFromOrder = order.getRelation("items");
+//		itemsFromOrder.getQuery().findInBackground(new FindCallback<ParseObject>() {
+//			public void done(List<ParseObject> itemList, ParseException e) {
+//				if (e != null) {
+//					// There was an error
+//				} else {
+//					itemObjects = itemList;
+//					orderItems.clear();
+//					for (ParseObject item : itemList) {
+//						String price = "[$" + item.getInt("price") + ".00]";
+//						orderItems.add(item.getString("name") + " " + price);
+//					}
+//					adapter.notifyDataSetChanged();
+//				}
+//			}
+//		});
+//	}
+
+	public void updatePrice(){
+		price = 0;
+		for (ParseObject selectedItem : selectedItems){
+			price += selectedItem.getInt("price");
+			System.out.println(selectedItem.get("name"));
+		}
+
+		TextView orderTotal = (TextView) findViewById(R.id.orderTotal);
+		orderTotal.setText("$" + price + ".00");
+	}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
@@ -153,7 +162,7 @@ public class OrderActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void onPressSubmit(View view) {
 		// do something
 		ParseObject order = new ParseObject("Order");
