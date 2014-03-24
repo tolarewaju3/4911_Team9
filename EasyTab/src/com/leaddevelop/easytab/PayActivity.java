@@ -32,12 +32,16 @@ public class PayActivity extends Activity {
 	ArrayList<String> orderItems;
 	ArrayAdapter<String> adapter;
 	int price;
+	int numBills;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pay);
 		
+		numBills = this.getIntent().getExtras().getInt("numBills");
+//		numBills = Integer.getInteger(numBillsString);
+		System.out.println(getIntent().getExtras().getInt("numBills"));
 		orderItems = new ArrayList<String>();
 		itemObjects = new ArrayList<ParseObject>();
 		selectedItems = new ArrayList<ParseObject>();
