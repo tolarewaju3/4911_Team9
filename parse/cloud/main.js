@@ -104,7 +104,13 @@ Parse.Cloud.define("updateBillIsPaid", function(request, response) {
 });
 
 Parse.Cloud.define("sendPaypalLinks", function(request, response) {
-	var payTo = "twizzenator@gmail.com"//request.params.user.get("email");
+	var payTo;
+	if (request.params.test) {
+		payTo = "twizzenator@gmail.com";
+	}
+	else {
+		payTo = request.params.user.get("email");
+	}
 	var orderId = request.params.orderId;
 	var orderQuery = new Parse.Query("Order");
 	orderQuery.get(orderId, {
@@ -163,6 +169,8 @@ Parse.Cloud.define("getPaypalLink", function(request, response) {
 					"email": request.params.payTo
 				}]
 			},
+			"returnUrl":"http://google.com",
+			"cancelUrl":"http://google.com",
 			"requestEnvelope":{
 				"errorLanguage":"en_US",
 				"detailLevel":"ReturnAll"

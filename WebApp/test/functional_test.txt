@@ -75,3 +75,17 @@ INPUT: click order row
 EXPECTED OUTPUT: a dialog should appear on the right
 INPUT: click close button
 EXPECTED OUTPUT: the dialog should disappear from view
+
+// Test sending Paypal links
+INPUT: go to https://www.twilio.com/user/account/phone-numbers/incoming
+INPUT: login with username: emorphis3@gatech.edu, pw: easytab123
+INPUT: click "Verify Another Number" and verify your personal phone number
+INPUT: go to the parse data browser: https://parse.com/apps/easytab/collections
+INPUT: login with credentials: username: tolarewaju3@gmail.com, pw: easytab123
+INPUT: create an order with two bills, mark the "paid" field as false for all three objects, 
+use your personal phone number for "phoneNumber," and set the "priceWithTax" and "tip" fields
+as desired. none of the other fields matter
+INPUT: in a command line call 
+	curl -X POST -H "X-Parse-Application-Id: X2S2BQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut" -H "X-Parse-REST-API-Key: a8mZL5zU5Kkw7w5IpACPbyeuAXfnzeYeFeaILwV4" -H "Content-Type: application/json" -d '{"orderId":[orderId], "test": true}' https://api.parse.com/1/functions/sendPaypalLinks
+replacing [orderId] with the objectId of the order you created in the previous step
+EXPECTED OUTPUT: you should receive two text messages containing working Paypal payment links
