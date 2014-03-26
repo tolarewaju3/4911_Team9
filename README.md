@@ -27,3 +27,11 @@ Parse is initialized at the top of each javascript file. An application ID and a
 Parse.initialize("applicationID", "javascript key");
 ```
 
+Functional tests are found in the test folder under WebPlatform. Tests are in the form of UI functional test with input and expected out put commands. 
+
+```
+INPUT: click the "Sign Up" button
+EXPECTED OUTPUT: signup page should appear
+```
+
+Deployment of the site is through Pancake.io. To see refelcted changes pushed on to master, pull the new files into Dropbox. Dropbox credentials are (username: emorphis@gmail.com, password: easytab123). Deployment time is approximately 5 minutes. 
