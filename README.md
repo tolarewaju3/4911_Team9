@@ -34,4 +34,4 @@ INPUT: click the "Sign Up" button
 EXPECTED OUTPUT: signup page should appear
 ```
 
-Deployment of the site is through Pancake.io. To see refelcted changes pushed on to master, pull the new files into Dropbox. Dropbox credentials are (username: emorphis@gmail.com, password: easytab123). Deployment time is approximately 5 minutes. 
+Deployment of the site is through Pancake.io. To see refelcted changes pushed on to master, pull the new files into Dropbox. Dropbox credentials are (username: emorphis3@gatech.edu, password: easytab123). Deployment is automatic and takes about 5 minutes. 
