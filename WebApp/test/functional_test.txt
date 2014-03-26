@@ -1,5 +1,5 @@
 // Test the login page
-INPUT: open home.html
+INPUT: open index.html
 EXPECTED OUTPUT: login page should appear
 INPUT: click the "Log In" button
 EXPECTED OUTPUT: error message should display

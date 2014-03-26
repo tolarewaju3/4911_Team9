@@ -97,6 +97,6 @@ function displayFeedback(section, positive, message) {
 
 $(document).ready(function() {
 	$('header h1').on('click', function() {
-		window.location.replace("./home.html")
+		window.location.replace("./index.html")
 	});
 });

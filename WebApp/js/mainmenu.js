@@ -12,11 +12,11 @@ $(document).ready(function() {
 			$('.menu').html("Add Menu");
 		}
 	} else {
-		window.location.replace("./home.html");
+		window.location.replace("./index.html");
 	}
 
 	$(".logoutButton").click(function() {
 		Parse.User.logOut();
-		window.location.replace("./home.html");
+		window.location.replace("./index.html");
 	});
 });

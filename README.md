@@ -24,5 +24,6 @@ _Web Platform_
 Parse is initialized at the top of each javascript file. An application ID and a javascript key are passed as arguments.
 
 ```
-Parse.initialize(_"applicationID"_, _"javascript key"_);
+Parse.initialize("applicationID", "javascript key");
 ```
+
