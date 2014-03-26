@@ -1,47 +1,51 @@
 package com.leaddevelop.easytab;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.FindCallback;
 import com.parse.ParseRelation;
 
 
 public class PayActivity extends Activity {
 	List<ParseObject> itemObjects;
 	List<ParseObject> selectedItems;
+	HashMap<String, List<ParseObject>> bills;
 	ArrayList<String> orderItems;
 	ArrayAdapter<String> adapter;
 	int price;
 	int numBills;
+	int numBillsRem;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pay);
 		
-		numBills = this.getIntent().getExtras().getInt("numBills");
-//		numBills = Integer.getInteger(numBillsString);
-		System.out.println(getIntent().getExtras().getInt("numBills"));
+//		numBills = this.getIntent().getExtras().getInt("numBills");
+		numBills = Integer.parseInt(this.getIntent().getExtras().getString("numBills"));
+		numBillsRem = numBills;
+		System.out.println(numBills);
 		orderItems = new ArrayList<String>();
 		itemObjects = new ArrayList<ParseObject>();
 		selectedItems = new ArrayList<ParseObject>();
@@ -137,9 +141,21 @@ public class PayActivity extends Activity {
 		finish();
 	}
 	
+	public void saveCurrentBill() {
+		EditText phoneNumberField = (EditText)findViewById(R.id.phoneNumberInput);
+		String phoneNumber = phoneNumberField.getText().toString();
+		bills.put(phoneNumber, selectedItems);
+	}
+	
 	public void onPressSubmit(View view) {
-		Intent intent = new Intent(this, SubmitActivity.class);
-		startActivity(intent);
+		saveCurrentBill();
+		numBillsRem--;
+		if(numBillsRem > 0) {
+			
+		} else {
+			Intent intent = new Intent(this, SubmitActivity.class);
+			startActivity(intent);
+		}
 	}
 
 	

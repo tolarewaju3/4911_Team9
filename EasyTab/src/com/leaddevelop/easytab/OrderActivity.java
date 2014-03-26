@@ -153,7 +153,9 @@ public class OrderActivity extends Activity {
 
 	public void onPressSubmit(View view) {
 		// do something
-		submitOrder();
+		if(selectedItems.size() == 0) {
+			Toast.makeText(getApplicationContext(), "No Items Selected!", 5).show();
+		} else submitOrder();
 	}
 	
 	public void submitOrder(){	
