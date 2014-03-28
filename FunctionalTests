@@ -1,0 +1,26 @@
+// Test the login screen
+If you have created a user prior:
+INPUT: valid username and password and click the "Login" button
+EXPECTED OUTPUT: Should show home screen
+INPUT: invalid username and password and click "Login" button
+EXPECTED OUTPUT: error toast should display "Login failed"
+
+
+// Test the ordering page
+INPUT: Select no items
+EXPECTED OUTPUT: Error toast should display "No Items Selected"
+INPUT: Select one ore more items
+EXPECTED OUTPUT: Total should update to be the sum of prices of the selected items
+INPUT: Press "Order"
+EXPECTED OUTPUT: Toast "Order Submitted" should appear 
+EXPECTED OUTPUT: Order Object with unique id should appear in database 
+
+
+// Test the Settings Page
+INPUT: click the "Settings" button
+OUTPUT:Setting Screen should show
+INPUT: Change the table number
+INPUT: Make a Order Using the Ordering Page
+OUTPUT: Order object should be in order database with correct table id
+
+
