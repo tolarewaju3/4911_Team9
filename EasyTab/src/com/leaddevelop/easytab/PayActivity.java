@@ -31,6 +31,7 @@ public class PayActivity extends Activity {
 	List<ParseObject> itemObjects;
 	List<ParseObject> selectedItems;
 	HashMap<String, List<ParseObject>> bills;
+	HashMap<String, List<ParseObject>> splittedBills;
 	ArrayList<String> orderItems;
 	ArrayAdapter<String> adapter;
 	int price;
@@ -49,6 +50,8 @@ public class PayActivity extends Activity {
 		orderItems = new ArrayList<String>();
 		itemObjects = new ArrayList<ParseObject>();
 		selectedItems = new ArrayList<ParseObject>();
+		splittedBills = new HashMap<String, List<ParseObject>>();
+		bills = new HashMap<String, List<ParseObject>>();
 		price = 0;
 		getTableOrder();
 		
