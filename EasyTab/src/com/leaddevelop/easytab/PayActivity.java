@@ -35,7 +35,7 @@ public class PayActivity extends Activity {
 	List<ParseObject> selectedItems;
 	List<ParseObject> splittedSelectedItems;
 	HashMap<String, List<ParseObject>> bills;
-	HashMap<String, List<ParseObject>> splittedBills;
+	HashMap<ParseObject, List<String>> splittedBills;
 	ArrayList<String> orderItems;
 	ArrayAdapter<String> adapter;
 	int price;
@@ -53,7 +53,7 @@ public class PayActivity extends Activity {
 		itemObjects = new ArrayList<ParseObject>();
 		selectedItems = new ArrayList<ParseObject>();
 		splittedSelectedItems = new ArrayList<ParseObject>();
-		splittedBills = new HashMap<String, List<ParseObject>>();
+		splittedBills = new HashMap<ParseObject, List<String>>();
 		bills = new HashMap<String, List<ParseObject>>();
 		price = 0;
 		getTableOrder();
