@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +33,7 @@ import com.parse.ParseRelation;
 public class PayActivity extends Activity {
 	List<ParseObject> itemObjects;
 	List<ParseObject> selectedItems;
+	List<ParseObject> splittedSelectedItems;
 	HashMap<String, List<ParseObject>> bills;
 	HashMap<String, List<ParseObject>> splittedBills;
 	ArrayList<String> orderItems;
@@ -43,13 +47,12 @@ public class PayActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pay);
 		
-//		numBills = this.getIntent().getExtras().getInt("numBills");
 		numBills = Integer.parseInt(this.getIntent().getExtras().getString("numBills"));
 		numBillsRem = numBills;
-		System.out.println(numBills);
 		orderItems = new ArrayList<String>();
 		itemObjects = new ArrayList<ParseObject>();
 		selectedItems = new ArrayList<ParseObject>();
+		splittedSelectedItems = new ArrayList<ParseObject>();
 		splittedBills = new HashMap<String, List<ParseObject>>();
 		bills = new HashMap<String, List<ParseObject>>();
 		price = 0;
@@ -70,7 +73,7 @@ public class PayActivity extends Activity {
                 	selectedItems.remove(orderItem);
                 }
                 else{
-                	selectedItems.add(orderItem);
+                	showItemSplitDialog(orderItem);
                 }
                 
                 textView.setChecked(!textView.isChecked());
@@ -159,6 +162,28 @@ public class PayActivity extends Activity {
 			Intent intent = new Intent(this, SubmitActivity.class);
 			startActivity(intent);
 		}
+	}
+	
+	public void showItemSplitDialog(final ParseObject item){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Splitting this item?");
+		// Set up the input
+		// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+		String[] options = {"Pay for whole", "Pay for part"};
+		builder.setItems(options, new DialogInterface.OnClickListener() {			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				if (which == 0){ // We are paying for whole item
+					selectedItems.add(item);
+				}
+				else{
+					splittedSelectedItems.add(item);
+				}
+			}
+		});
+		
+		builder.create().show();
 	}
 
 	
