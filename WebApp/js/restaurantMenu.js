@@ -316,7 +316,7 @@ function render_item(item) {
 
 	var itemRow = $(".itemRow", $(".templates")).clone().attr("data-parse-id", item.id);
 	$(".itemName", itemRow).text(item.get("name"));
-	$(".itemPrice", itemRow).text(item.get("price"));
+	$(".itemPrice", itemRow).text("$" + parseFloat(item.get("price")).toFixed(2));
 	$(".itemDescription", itemRow).text(item.get("description"));
 	$(".tableBody").append(itemRow);
 }
