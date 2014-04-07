@@ -151,6 +151,24 @@ public class PayActivity extends Activity {
 		EditText phoneNumberField = (EditText)findViewById(R.id.phoneNumberInput);
 		String phoneNumber = phoneNumberField.getText().toString();
 		bills.put(phoneNumber, selectedItems);
+		for(ParseObject item : splittedSelectedItems) {
+			List<String> phoneNumbers;
+			if(splittedBills.containsKey(item)) {
+				phoneNumbers = splittedBills.get(item);
+			} else {
+				phoneNumbers = new ArrayList<String>();
+			}
+			phoneNumbers.add(phoneNumber);
+			splittedBills.put(item, phoneNumbers);			
+		}
+		for(ParseObject item : selectedItems) {
+			String price = "[$" + item.getInt("price") + ".00]";
+			orderItems.remove(item.getString("name") + " " + price);
+		}
+		adapter.notifyDataSetChanged();
+		selectedItems.clear();
+		splittedSelectedItems.clear();
+		phoneNumberField.setText("");
 	}
 	
 	public void onPressSubmit(View view) {
