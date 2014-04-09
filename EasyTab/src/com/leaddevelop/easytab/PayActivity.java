@@ -168,6 +168,7 @@ public class PayActivity extends Activity {
 		adapter.notifyDataSetChanged();
 		selectedItems.clear();
 		splittedSelectedItems.clear();
+		updatePrice();
 		phoneNumberField.setText("");
 	}
 	
