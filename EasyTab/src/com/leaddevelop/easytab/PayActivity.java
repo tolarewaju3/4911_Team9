@@ -173,6 +173,7 @@ public class PayActivity extends Activity {
 	
 	public void onPressSubmit(View view) {
 		saveCurrentBill();
+		clearListItems();
 		numBillsRem--;
 		if(numBillsRem > 0) {
 			
@@ -198,10 +199,21 @@ public class PayActivity extends Activity {
 				else{
 					splittedSelectedItems.add(item);
 				}
+				updatePrice();
 			}
 		});
 		
 		builder.create().show();
+	}
+	
+	public void clearListItems(){
+		ListView listView1 = (ListView) findViewById(R.id.listView1);
+		listView1.clearChoices();
+        for (int i = 0; i < listView1.getCount(); i++){
+        	CheckedTextView textView = (CheckedTextView)listView1.getChildAt(i);
+       	 	System.out.println(textView.getText());
+       	 	textView.setChecked(false);
+        }
 	}
 
 	
