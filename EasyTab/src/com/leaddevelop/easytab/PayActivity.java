@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -150,8 +149,22 @@ public class PayActivity extends Activity {
 	public void saveCurrentBill() {
 		EditText phoneNumberField = (EditText)findViewById(R.id.phoneNumberInput);
 		String phoneNumber = phoneNumberField.getText().toString();
-		bills.put(phoneNumber, selectedItems);
-		for(ParseObject item : splittedSelectedItems) {
+		
+		List<ParseObject> selectedClone = new ArrayList<ParseObject>();
+		for(ParseObject obj : selectedItems) {
+			selectedClone.add(obj);
+		}
+		
+		bills.put(phoneNumber, selectedClone);
+
+		
+		List<ParseObject> splittedSelectedClone = new ArrayList<ParseObject>();
+		for(ParseObject obj : splittedSelectedItems) {
+			splittedSelectedClone.add(obj);
+		}
+		
+		
+		for(ParseObject item : splittedSelectedClone) {
 			List<String> phoneNumbers;
 			if(splittedBills.containsKey(item)) {
 				phoneNumbers = splittedBills.get(item);
@@ -164,6 +177,7 @@ public class PayActivity extends Activity {
 		for(ParseObject item : selectedItems) {
 			String price = "[$" + item.getInt("price") + ".00]";
 			orderItems.remove(item.getString("name") + " " + price);
+			itemObjects.remove(item);
 		}
 		adapter.notifyDataSetChanged();
 		selectedItems.clear();
@@ -180,6 +194,8 @@ public class PayActivity extends Activity {
 			
 		} else {
 			Intent intent = new Intent(this, SubmitActivity.class);
+			GlobalState.setBillsHolder(bills);
+			GlobalState.setSplittedBillsHolder(splittedBills);
 			startActivity(intent);
 		}
 	}

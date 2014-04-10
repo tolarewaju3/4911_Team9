@@ -15,15 +15,6 @@
         android:layout_centerInParent="true" />
 
      <ListView
-         android:id="@+id/listView1"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignRight="@id/anchor2"
-         android:layout_centerVertical="true" >
-
-     </ListView>
-
-     <ListView
          android:id="@+id/listView2"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -38,9 +29,17 @@
          android:id="@+id/button_submit"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignBottom="@+id/listView1"
          android:layout_alignRight="@+id/listView2"
+         android:layout_centerVertical="true"
          android:layout_marginRight="180dp"
          android:text="@string/submit_button_text" />
+
+     <ExpandableListView
+         android:id="@+id/summary_view"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignRight="@id/anchor2"
+         android:layout_centerVertical="true" >
+     </ExpandableListView>
      
 </RelativeLayout>
