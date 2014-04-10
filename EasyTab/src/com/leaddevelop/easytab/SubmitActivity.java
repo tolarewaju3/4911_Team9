@@ -30,7 +30,7 @@ public class SubmitActivity extends Activity {
 		HashMap<String, List<ParseObject>> bills = GlobalState.getBillsHolder();
 		HashMap<ParseObject, List<String>> splittedBills = GlobalState.getSplittedBillsHolder();
 
-		
+		/* Build the bill summaries */
 		Set<String> stringSet = bills.keySet();
 		List<String> phoneNums = new ArrayList<String>();
 		for(String str : stringSet) {
@@ -44,18 +44,27 @@ public class SubmitActivity extends Activity {
 		
 		HashMap<String, Double> totals = calculateTotals(bills, splittedBills);
 		
+		/* Construct the totals per person */
 		List<String> phoneNumsWithTotals = new ArrayList<String>();
 		for(String num : phoneNums) {
 			NumberFormat formatter = NumberFormat.getCurrencyInstance();
 			phoneNumsWithTotals.add(num + ": " + formatter.format(totals.get(num)));
 		}
 		
+		/* Attach totals to the layout */
 		ListView listView1 = (ListView) findViewById(R.id.listView2);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
         		android.R.layout.simple_list_item_1, phoneNumsWithTotals);       
         listView1.setAdapter(adapter);
 	}
-
+	
+	/**
+	 * Takes in the bills and returns a data structure with calculated
+	 * total per person
+	 * @param bills
+	 * @param splittedBills
+	 * @return
+	 */
 	private HashMap<String, Double> calculateTotals(
 			HashMap<String, List<ParseObject>> bills,
 			HashMap<ParseObject, List<String>> splittedBills) {
@@ -87,6 +96,12 @@ public class SubmitActivity extends Activity {
 		return true;
 	}
 
+	
+	/**
+	 * Takes in the bill data structure and returns it in text form
+	 * @param bills
+	 * @return
+	 */
 	public HashMap<String, List<String>> parseBillsToText(HashMap<String, List<ParseObject>> bills) {
 		HashMap<String, List<String>> personalSummaries = new HashMap<String, List<String>>();
 		for(Entry<String, List<ParseObject>> entry : bills.entrySet()) {

@@ -150,6 +150,7 @@ public class PayActivity extends Activity {
 		EditText phoneNumberField = (EditText)findViewById(R.id.phoneNumberInput);
 		String phoneNumber = phoneNumberField.getText().toString();
 		
+		/* Build deep copy of selected items */
 		List<ParseObject> selectedClone = new ArrayList<ParseObject>();
 		for(ParseObject obj : selectedItems) {
 			selectedClone.add(obj);
@@ -157,7 +158,7 @@ public class PayActivity extends Activity {
 		
 		bills.put(phoneNumber, selectedClone);
 
-		
+		/* Build deep copy of splitted selected items */
 		List<ParseObject> splittedSelectedClone = new ArrayList<ParseObject>();
 		for(ParseObject obj : splittedSelectedItems) {
 			splittedSelectedClone.add(obj);
