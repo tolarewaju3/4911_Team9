@@ -1,7 +1,7 @@
 package com.leaddevelop.easytab;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -10,8 +10,10 @@ import java.util.Set;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import com.parse.ParseObject;
 
@@ -39,7 +41,43 @@ public class SubmitActivity extends Activity {
 		final ExpandableListAdapter expListAdapter = new OrderSummaryAdapter(
 				this, phoneNums, personalSummaries);
 		expListView.setAdapter(expListAdapter);
+		
+		HashMap<String, Double> totals = calculateTotals(bills, splittedBills);
+		
+		List<String> phoneNumsWithTotals = new ArrayList<String>();
+		for(String num : phoneNums) {
+			NumberFormat formatter = NumberFormat.getCurrencyInstance();
+			phoneNumsWithTotals.add(num + ": " + formatter.format(totals.get(num)));
+		}
+		
+		ListView listView1 = (ListView) findViewById(R.id.listView2);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
+        		android.R.layout.simple_list_item_1, phoneNumsWithTotals);       
+        listView1.setAdapter(adapter);
+	}
 
+	private HashMap<String, Double> calculateTotals(
+			HashMap<String, List<ParseObject>> bills,
+			HashMap<ParseObject, List<String>> splittedBills) {
+		// TODO Auto-generated method stub
+		HashMap<String, Double> totals = new HashMap<String, Double>();
+		for(Entry<String, List<ParseObject>> entry : bills.entrySet()) {
+			String phoneNum = entry.getKey();
+			double total = 0;
+			for(ParseObject item : entry.getValue()) {
+				total += item.getInt("price");
+			}
+			totals.put(phoneNum, total);
+		}
+		for(Entry<ParseObject, List<String>> entry : splittedBills.entrySet()) {
+			ParseObject item = entry.getKey();
+			double divPrice = ((double)item.getInt("price"))/entry.getValue().size();
+			for(String phoneNum : entry.getValue()) {
+				double currTotal = totals.get(phoneNum);
+				totals.put(phoneNum, currTotal + divPrice);
+			}
+		}
+		return totals;
 	}
 
 	@Override

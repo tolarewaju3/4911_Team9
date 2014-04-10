@@ -20,5 +20,7 @@
     <string name="title_activity_submit">SubmitActivity</string>
     <string name="submit_button_text">Submit</string>
     <string name="title_activity_order">OrderActivity</string>
+    <string name="bill_summary_text">Bill summary</string>
+    <string name="bill_totals_text">Bill totals</string>
 
 </resources>

@@ -21,25 +21,44 @@
          android:layout_above="@+id/button_submit"
          android:layout_alignLeft="@+id/anchor2"
          android:layout_alignParentRight="true"
-         android:layout_alignParentTop="true" >
+         android:layout_alignParentStart="@+id/button_submit"
+         android:layout_below="@+id/textView1" >
 
      </ListView>
-
-     <Button
-         android:id="@+id/button_submit"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignRight="@+id/listView2"
-         android:layout_centerVertical="true"
-         android:layout_marginRight="180dp"
-         android:text="@string/submit_button_text" />
 
      <ExpandableListView
          android:id="@+id/summary_view"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_alignRight="@id/anchor2"
-         android:layout_centerVertical="true" >
+         android:layout_below="@+id/textView1" >
+
      </ExpandableListView>
+
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_alignRight="@+id/summary_view"
+         android:layout_marginRight="196dp"
+         android:text="@string/bill_summary_text" />
+
+     <TextView
+         android:id="@+id/textView2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/button_submit"
+         android:layout_alignParentTop="true"
+         android:text="@string/bill_totals_text" />
+
+     <Button
+         android:id="@+id/button_submit"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_alignRight="@+id/listView2"
+         android:layout_marginRight="168dp"
+         android:text="@string/submit_button_text" />
      
 </RelativeLayout>
