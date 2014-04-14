@@ -20,6 +20,7 @@ import com.parse.ParseObject;
 public class SubmitActivity extends Activity {
 
 	private ExpandableListView expListView;
+	private final double taxMultiplier = 1.08;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -56,6 +57,9 @@ public class SubmitActivity extends Activity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
         		android.R.layout.simple_list_item_1, phoneNumsWithTotals);       
         listView1.setAdapter(adapter);
+        
+        HashMap<String, List<ParseObject>> updatedBills = updateIndividualBills(bills, splittedBills);
+        
 	}
 	
 	/**
@@ -83,12 +87,45 @@ public class SubmitActivity extends Activity {
 			double divPrice = ((double)item.getInt("price"))/entry.getValue().size();
 			for(String phoneNum : entry.getValue()) {
 				double currTotal = totals.get(phoneNum);
-				totals.put(phoneNum, currTotal + divPrice);
+				totals.put(phoneNum, (currTotal + divPrice)*taxMultiplier);
 			}
 		}
 		return totals;
 	}
-
+	
+	public HashMap<String, List<ParseObject>> updateIndividualBills(
+			HashMap<String, List<ParseObject>> bills,
+			HashMap<ParseObject, List<String>> splittedBills) {
+		for(Entry<ParseObject, List<String>> entry : splittedBills.entrySet()) {
+			ParseObject item = entry.getKey();
+			for(String phoneNum : entry.getValue()) {
+				List<ParseObject> items = bills.get(phoneNum);
+				items.add(item);
+				bills.put(phoneNum, items);
+			}
+		}
+		return bills;
+	}
+	
+	public void uploadBills(HashMap<String, List<ParseObject>> bills,
+			HashMap<String, Double> totals) {
+		for(Entry<String, List<ParseObject>> bill : bills.entrySet()) {
+			String phoneNum = bill.getKey();
+			List<ParseObject> items = bill.getValue();
+			double total = totals.get(phoneNum);
+			
+			ParseObject parseBill = new ParseObject("Bill");
+			parseBill.put("priceWithTax", total);
+			parseBill.put("phoneNumber", phoneNum);
+			parseBill.put("tip", 1); // FIX THIS TOO
+			parseBill.put("paid", false);
+			// do the relation thing
+			
+			parseBill.saveInBackground();
+		}
+	}
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
