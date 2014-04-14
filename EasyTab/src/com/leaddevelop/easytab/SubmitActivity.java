@@ -8,19 +8,26 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.parse.ParseObject;
+import com.parse.ParseRelation;
 
 public class SubmitActivity extends Activity {
 
 	private ExpandableListView expListView;
 	private final double taxMultiplier = 1.08;
+	
+	 HashMap<String, List<ParseObject>> updatedBills;
+	 HashMap<String, Double> totals;
+	 ParseObject order;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -30,7 +37,8 @@ public class SubmitActivity extends Activity {
 		Bundle bundle = getIntent().getExtras();
 		HashMap<String, List<ParseObject>> bills = GlobalState.getBillsHolder();
 		HashMap<ParseObject, List<String>> splittedBills = GlobalState.getSplittedBillsHolder();
-
+		order = GlobalState.getOrder();
+		
 		/* Build the bill summaries */
 		Set<String> stringSet = bills.keySet();
 		List<String> phoneNums = new ArrayList<String>();
@@ -43,7 +51,7 @@ public class SubmitActivity extends Activity {
 				this, phoneNums, personalSummaries);
 		expListView.setAdapter(expListAdapter);
 		
-		HashMap<String, Double> totals = calculateTotals(bills, splittedBills);
+		totals = calculateTotals(bills, splittedBills);
 		
 		/* Construct the totals per person */
 		List<String> phoneNumsWithTotals = new ArrayList<String>();
@@ -58,7 +66,7 @@ public class SubmitActivity extends Activity {
         		android.R.layout.simple_list_item_1, phoneNumsWithTotals);       
         listView1.setAdapter(adapter);
         
-        HashMap<String, List<ParseObject>> updatedBills = updateIndividualBills(bills, splittedBills);
+       updatedBills = updateIndividualBills(bills, splittedBills);
         
 	}
 	
@@ -119,12 +127,21 @@ public class SubmitActivity extends Activity {
 			parseBill.put("phoneNumber", phoneNum);
 			parseBill.put("tip", 1); // FIX THIS TOO
 			parseBill.put("paid", false);
-			// do the relation thing
+			parseBill.put("order", order);
+			
+			ParseRelation<ParseObject> itemRelation = parseBill.getRelation("items");
+			
+			for(ParseObject item : items) {
+				itemRelation.add(item);
+			}
 			
 			parseBill.saveInBackground();
 		}
 	}
 	
+	public void onPressSubmit(View view) {
+		uploadBills(updatedBills, totals);
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

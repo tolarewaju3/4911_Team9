@@ -12,6 +12,8 @@ public class GlobalState extends Application {
 	private static HashMap<String, List<ParseObject>> billsHolder;
 	private static HashMap<ParseObject, List<String>> splittedBillsHolder;
 	
+	private static ParseObject order;
+	
 	public static HashMap<String, List<ParseObject>> getBillsHolder() {
 		return billsHolder;
 	}
@@ -25,7 +27,13 @@ public class GlobalState extends Application {
 			HashMap<ParseObject, List<String>> splittedBillsHolder) {
 		GlobalState.splittedBillsHolder = splittedBillsHolder;
 	}
+	public static void setOrderHolder(ParseObject orderObject) {
+		GlobalState.order = orderObject;
+	}
 	
+	public static ParseObject getOrder() {
+		return GlobalState.order;
+	}
 	
 	
 }

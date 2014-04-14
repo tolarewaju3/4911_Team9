@@ -40,6 +40,7 @@ public class PayActivity extends Activity {
 	int price;
 	int numBills;
 	int numBillsRem;
+	ParseObject order;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +113,7 @@ public class PayActivity extends Activity {
 	}
 	
 	public void getOrderItems(ParseObject order){
+		this.order = order;
 		ParseRelation<ParseObject> itemsFromOrder = order.getRelation("items");
 		itemsFromOrder.getQuery().findInBackground(new FindCallback<ParseObject>() {
 		    public void done(List<ParseObject> itemList, ParseException e) {
@@ -197,6 +199,7 @@ public class PayActivity extends Activity {
 			Intent intent = new Intent(this, SubmitActivity.class);
 			GlobalState.setBillsHolder(bills);
 			GlobalState.setSplittedBillsHolder(splittedBills);
+			GlobalState.setOrderHolder(order);
 			startActivity(intent);
 		}
 	}
