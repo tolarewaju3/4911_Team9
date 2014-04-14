@@ -1,4 +1,9 @@
-$(document).ready(function() {
+/*
+    Initialize Parse Object, Redirect users to homepage if they are not logged in,
+    setup logout button listener
+*/
+
+$(document).ready(function () {
 
 	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");
 

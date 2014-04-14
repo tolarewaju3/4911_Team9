@@ -1,4 +1,9 @@
-$(document).ready(function() {
+/*
+    The only actions on this page are to initialize the Parse object and
+    setup a listener around the login button.
+*/
+
+$(document).ready(function () {
 
 	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");	
 

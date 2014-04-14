@@ -1,11 +1,14 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
+    /* Initialize Parse Object */
 	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");	
 
+    /* Redirect user to Home, if not logged in */
 	if (Parse.User.current()) {
 		window.location.replace("./index.html")
 	}
 
+    /* Perform form validation for sign-up form */
 	$(".signUpForm").submit(function(event) {
 		event.preventDefault();
  
@@ -45,6 +48,7 @@ $(document).ready(function() {
 			});
 		}
 
+        /* Display Error Message */
 		function signupError(message) {
 			$(".signupError").removeClass("positive").addClass("negative");
 			$(".signupError").text(message)

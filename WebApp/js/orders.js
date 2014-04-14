@@ -2,7 +2,6 @@ var currentUser;
 var Order;
 var user;
 var orders;
-
 $(document).ready(function() {
 	
 	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");
