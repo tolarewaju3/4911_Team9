@@ -2,8 +2,9 @@ var currentUser;
 var Order;
 var user;
 var orders;
+
 $(document).ready(function() {
-	
+	/*  Initialize Parse Object */
 	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");
 	
 	Order = Parse.Object.extend("Order");
@@ -22,6 +23,7 @@ $(document).ready(function() {
 		});
 	}
 
+    /* For elements added to the dom later, add click events for order rows */
 	$(document).on("click", ".orderRow", function() {
 		hide_all_details();
 		var orderID = $(this).attr("data-order-id");
@@ -51,6 +53,7 @@ function render_table() {
 	}
 }
 
+/* Retrieve orders from Parse, create order details objects, add them to the dom */
 function render_order_details() {
 	var orderDetails = $(".orderDetails");
 
@@ -114,6 +117,14 @@ function render_no_orders() {
 	$(".tableBody").append(noOrdersRow);
 }
 
+function hide_all_details() {
+    var orderDetails = $(".pricing-table", $(".orderDetails")).toArray();
+    orderDetails.forEach(function (table) {
+        $(table).removeClass("hide").addClass("hide");
+    });
+}
+
+/* Query all orders from Parse */
 function all_orders_query() {
 	var query = new Parse.Query(Order);
 	query.equalTo("user", user);
@@ -121,7 +132,7 @@ function all_orders_query() {
 	return query;
 }
 
-
+/* Format date time of place order to look nice */
 function render_order_date_time(dateObj) {
 	var date = $.datepicker.formatDate("DD, MM d, yy", dateObj);
 	
@@ -134,11 +145,4 @@ function render_order_date_time(dateObj) {
 	var time = hours + ':' + minutes + ' ' + ampm;
 	
 	return date + " " + time;
-}
-
-function hide_all_details() {
-	var orderDetails = $(".pricing-table", $(".orderDetails")).toArray();
-	orderDetails.forEach(function(table) {
-		$(table).removeClass("hide").addClass("hide");
-	});
 }
