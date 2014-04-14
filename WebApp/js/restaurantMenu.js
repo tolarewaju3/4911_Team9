@@ -1,3 +1,7 @@
+/*
+This javascript file provides the functionality for the add/edit menu page
+*/
+
 var currentUser;
 var successfulChangeText = "Changes Saved Successfully!";
 var menu;
@@ -36,6 +40,7 @@ $(document).ready(function() {
 	setup_buttons();
 });
 
+//binds actions to buttons so that the menu can be edited
 function setup_buttons() {
 	$('.menuNameForm').submit(function(e) {
 		e.preventDefault();
@@ -158,6 +163,7 @@ function setup_buttons() {
 	});
 }
 
+//deletes the menu and all items contained in both the database and on the document page
 function delete_menu() {
 	menu.destroy({
 		success: function(menuObject) {
@@ -177,6 +183,8 @@ function delete_menu() {
 	});
 }
 
+//deletes items from the page and document. rows specifies the jquery row elements
+//from the document page and items specifies the parse collection of items
 function delete_items(rows, items) {
 	items.fetch({
 		success: function(items) {
@@ -194,6 +202,8 @@ function show_menu_edit_panels() {
 	$('.actionPanel').removeClass('hide');
 }
 
+//creates a new menu object in Parse, with the name field equal to the value in the
+//text field. alters the document to reveal buttons to allow menu editing
 function create_new_menu() {
 	var newMenu = new Menu();
 
@@ -216,6 +226,7 @@ function create_new_menu() {
 	});
 }
 
+//updates the name of the menu based on the value in the text field
 function update_menu_name() {
 	menu.set('name', $('.menuNameField').val());
 
@@ -269,6 +280,7 @@ function hide_item_editor() {
 	$(".itemEditor").addClass('hide');
 }
 
+//adds an item in Parse based on the name, price, and description fields in the document
 function add_item(name, price, description) {
 	var item = new Item();
 	item.set("name", name);
@@ -282,6 +294,7 @@ function add_item(name, price, description) {
 	});
 }
 
+//shows the item table on the document based on the items in Parse
 function render_table() {
 	show_items_table();
 	var table = $('.tableBody');
@@ -302,12 +315,14 @@ function render_table() {
 	});
 }
 
+//returns a query of all items associated with the current menu
 function all_items_query() {
 	var query = new Parse.Query(Item);
 	query.equalTo("menu", menu);
 	return query;
 }
 
+//shows the item in the item table in the document
 function render_item(item) {	
 	if ($(".noItemsRow", $(".tableBody"))[0])
 	{
@@ -321,6 +336,7 @@ function render_item(item) {
 	$(".tableBody").append(itemRow);
 }
 
+//removes item from the document
 function remove_row(row) {
 	row.remove();
 	if ($(".itemRow", $(".tableBody"))[0] == null) {
@@ -328,11 +344,13 @@ function remove_row(row) {
 	}
 }
 
+//adds a row to the menu table indicating that the menu contains no items
 function render_no_items() {
 	var noItemsRow = $(".noItemsRow", $(".templates")).clone();
 	$(".tableBody").append(noItemsRow);
 }
 
+//removes row indicating that the menu contains no items
 function remove_no_items() {
 	$(".noItemsRow", $(".tableBody")).remove();
 }

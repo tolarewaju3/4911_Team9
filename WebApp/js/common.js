@@ -34,6 +34,7 @@ function validZipCode(zipCode) {
 	return re.test(zipCode);
 }
 
+//validates each field against its associated regex
 function validateSettings(location, taxPct, email, password, address, zipCode, section) {
 	var valid = true;
 
@@ -49,6 +50,7 @@ function validateSettings(location, taxPct, email, password, address, zipCode, s
 	return valid;
 }
 
+//validates each field against its associated regex except for the password field
 function validateSettingsBesidesPassword(location, taxPct, email, address, zipCode, section) {
 	var valid = true;
 
@@ -80,6 +82,7 @@ function validateSettingsBesidesPassword(location, taxPct, email, address, zipCo
 	return valid;
 }
 
+//displays negative or positive feedback message in a given section
 function displayFeedback(section, positive, message) {
 	var allFeedback = $(".feedback");
 	allFeedback.hide();
