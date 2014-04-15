@@ -1,5 +1,5 @@
 Parse.Cloud.define("updateAllOrdersArePaid", function(request, response) {
-	var user = request.params.user;
+	var user = request.user;
 	var orderQuery = new Parse.Query("Order");
 	orderQuery.equalTo("user", user);
 	orderQuery.equalTo("paid", false);
@@ -109,7 +109,7 @@ Parse.Cloud.define("sendPaypalLinks", function(request, response) {
 		payTo = "twizzenator@gmail.com";
 	}
 	else {
-		payTo = request.params.user.get("email");
+		payTo = request.user.get("email");
 	}
 	var orderId = request.params.orderId;
 	var orderQuery = new Parse.Query("Order");
