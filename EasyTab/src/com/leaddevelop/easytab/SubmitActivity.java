@@ -16,9 +16,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseRelation;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class SubmitActivity extends Activity {
 
@@ -117,6 +123,8 @@ public class SubmitActivity extends Activity {
 	
 	public void uploadBills(HashMap<String, List<ParseObject>> bills,
 			HashMap<String, Double> totals) {
+		List<ParseObject> billsToSave = new ArrayList<ParseObject>();
+		
 		for(Entry<String, List<ParseObject>> bill : bills.entrySet()) {
 			String phoneNum = bill.getKey();
 			List<ParseObject> items = bill.getValue();
@@ -134,9 +142,42 @@ public class SubmitActivity extends Activity {
 			for(ParseObject item : items) {
 				itemRelation.add(item);
 			}
-			
-			parseBill.saveInBackground();
+			billsToSave.add(parseBill);
 		}
+		
+		ParseObject.saveAllInBackground(billsToSave, new SaveCallback(){
+
+			@Override
+			public void done(ParseException e) {
+				// TODO Auto-generated method stub
+				if(e == null){
+					sendPaypalLinks();
+				}
+				else{
+					Toast.makeText(getApplicationContext(), "Processing Bills Failed!", 5).show();
+				}
+			}
+			
+		});
+	}
+	
+	public void sendPaypalLinks(){
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		ParseUser user = ParseUser.getCurrentUser();
+		params.put("orderId", order.getObjectId());
+		params.put("user", user.getObjectId());
+		ParseCloud.callFunctionInBackground("sendPaypalLinks", params, new FunctionCallback<String>() {
+		   public void done(String done, ParseException e) {
+			   if(e == null){
+					Toast.makeText(getApplicationContext(), "Payment Links Sent!", 5).show();
+					//finish();
+				}
+				else{
+					Toast.makeText(getApplicationContext(), "Processing Links Failed!", 5).show();
+					System.out.println(e.toString());
+				}
+		   }
+		});
 	}
 	
 	public void onPressSubmit(View view) {
