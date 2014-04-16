@@ -1,3 +1,4 @@
+// iterates through the logged in user's unpaid orders and checks if any are now paid
 Parse.Cloud.define("updateAllOrdersArePaid", function(request, response) {
 	var user = request.user;
 	var orderQuery = new Parse.Query("Order");
@@ -27,6 +28,8 @@ Parse.Cloud.define("updateAllOrdersArePaid", function(request, response) {
 	});
 });
 
+// iterates through an order's bills and checks if any are now paid and returns whether
+// or not the entire order is paid for
 Parse.Cloud.define("updateOrderIsPaid", function(request, response) {
 	var orderId = request.params.orderId;
 	var orderQuery = new Parse.Query("Order");
@@ -63,6 +66,7 @@ Parse.Cloud.define("updateOrderIsPaid", function(request, response) {
 	});
 });
 
+// queries paypal to see whether the bill is now paid for and if so updates it
 Parse.Cloud.define("updateBillIsPaid", function(request, response) {
 	var billId = request.params.billId;
 	var billQuery = new Parse.Query("Bill");
@@ -103,6 +107,8 @@ Parse.Cloud.define("updateBillIsPaid", function(request, response) {
 	});
 });
 
+// iterates through an order's bills, gets a paypal link for each and sends each to the
+// bill's corresponding phone number
 Parse.Cloud.define("sendPaypalLinks", function(request, response) {
 	var payTo;
 	if (request.params.test) {
@@ -120,7 +126,7 @@ Parse.Cloud.define("sendPaypalLinks", function(request, response) {
 			billQuery.find({
 				success: function(bills) {
 					bills.forEach(function(bill) {
-						var totalPrice = String(parseFloat(bill.get("priceWithTax")) + parseFloat(bill.get("tip"))) + "0";
+						var totalPrice = (parseFloat(bill.get("priceWithTax")) + parseFloat(bill.get("tip"))).toFixed(2);
 						var phoneNumber = bill.get("phoneNumber");
 						Parse.Cloud.run("getPaypalLink", {price: totalPrice, payTo: payTo}, {
 							success: function(payKey) {
@@ -137,6 +143,7 @@ Parse.Cloud.define("sendPaypalLinks", function(request, response) {
 	});
 });
 
+// requests that the twilio api sends the paypal link to a given phone number
 Parse.Cloud.define("sendPaypalLink", function(request, response) {
 	Parse.Cloud.httpRequest({
 		url: "https://ACddd9097f8bca2b487b79c4d8507bb154:4449c76111ba18909cdcece680484fa0@api.twilio.com/2010-04-01/Accounts/ACddd9097f8bca2b487b79c4d8507bb154/Messages.json",
@@ -149,6 +156,7 @@ Parse.Cloud.define("sendPaypalLink", function(request, response) {
 	});
 });
 
+// queries paypal to get a link to a payment portal for the bill
 Parse.Cloud.define("getPaypalLink", function(request, response) {
 	Parse.Cloud.httpRequest({
 		url: "https://svcs.sandbox.paypal.com/AdaptivePayments/Pay",

@@ -32,7 +32,6 @@ $(document).ready(function () {
 			user.set("state", state);
 			user.set("address", address);
 			user.set("zipCode", zipCode);
-			user.set("hasMenu", false);
 
 			user.signUp(null, {
 				success: function(user) {
