@@ -6,22 +6,27 @@ var orders;
 $(document).ready(function() {
 	/*  Initialize Parse Object */
 	Parse.initialize("X2S2BQQcTvCtg1bFVtHViTyy4bKXCvWrOuahnMut", "6m2FrVnFYbapf0mRID6nSdsDeAxOoNcA9On30fSV");
-	
-	Order = Parse.Object.extend("Order");
-	currentUser = Parse.User.current();
-	if (!currentUser) { window.location.replace("../");}
 
-	user = Parse.User.current();
-	var retrievedOrders = all_orders_query().collection();
-	if (retrievedOrders) {
-		retrievedOrders.fetch({
-			success: function(retrievedOrders) {
-				orders = retrievedOrders;
-				render_table();
-				render_order_details();
+	// check if any previously unpaid orders are now paid before building page
+	Parse.Cloud.run('updateAllOrdersArePaid', {}, {
+  		success: function(ratings) {
+			Order = Parse.Object.extend("Order");
+			currentUser = Parse.User.current();
+			if (!currentUser) { window.location.replace("../");}
+
+			user = Parse.User.current();
+			var retrievedOrders = all_orders_query().collection();
+			if (retrievedOrders) {
+				retrievedOrders.fetch({
+					success: function(retrievedOrders) {
+						orders = retrievedOrders;
+						render_table();
+						render_order_details();
+					}
+				});
 			}
-		});
-	}
+  		}
+	});
 
     /* For elements added to the dom later, add click events for order rows */
 	$(document).on("click", ".orderRow", function() {
