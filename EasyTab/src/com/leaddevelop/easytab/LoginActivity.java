@@ -14,8 +14,15 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.twilio.sdk.TwilioRestException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginActivity.
+ */
 public class LoginActivity extends Activity {
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,6 +30,9 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -30,12 +40,24 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * On press.
+	 *
+	 * @param view the view
+	 */
 	public void onPress(View view) {
 		EditText usernameField = (EditText)findViewById(R.id.usernameField);
 		EditText passwordField = (EditText)findViewById(R.id.passwordField);
 		login(usernameField.getText().toString(), passwordField.getText().toString());
 	}
 	
+	/**
+	 * Attempt to login
+	 * If login is successful, start the HomeActivity
+	 * Otherwise, show an error toast
+	 * @param username the username
+	 * @param password the password
+	 */
 	public void login(String username, String password) {
 		ParseUser.logInInBackground(username, password, new LogInCallback() {		
 			@Override
@@ -60,13 +82,14 @@ public class LoginActivity extends Activity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					//					toast.setView(getCurrentFocus());
-//					toast.show();
 				}
 			}
 		});
 	}
 	
+	/**
+	 * Complete login.
+	 */
 	public void completeLogin() {
 		Intent intent = new Intent(this, HomeActivity.class);
 		startActivity(intent);

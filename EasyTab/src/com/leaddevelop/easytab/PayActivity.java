@@ -29,19 +29,48 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PayActivity.
+ */
 public class PayActivity extends Activity {
+	
+	/** The item objects. */
 	List<ParseObject> itemObjects;
+	
+	/** The selected items. */
 	List<ParseObject> selectedItems;
+	
+	/** The splitted selected items. */
 	List<ParseObject> splittedSelectedItems;
+	
+	/** The bills. */
 	HashMap<String, List<ParseObject>> bills;
+	
+	/** The splitted bills. */
 	HashMap<ParseObject, List<String>> splittedBills;
+	
+	/** The order items. */
 	ArrayList<String> orderItems;
+	
+	/** The adapter. */
 	ArrayAdapter<String> adapter;
+	
+	/** The price for bill */
 	int price;
+	
+	/** The number of bills on this order */
 	int numBills;
+	
+	/** The number bills remaining. */
 	int numBillsRem;
+	
+	/** The order. */
 	ParseObject order;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,6 +112,9 @@ public class PayActivity extends Activity {
         
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -90,7 +122,11 @@ public class PayActivity extends Activity {
 		return true;
 	}
 	
-	// Get the unpaid order for this table that hasn't been paid
+	/**
+	 * Get the unpaid order for this table that hasn't been paid
+	 * If there are no open table orders, show an error toast
+	 * @return the table order
+	 */
 	public void getTableOrder(){ 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		int tableNumber = Integer.parseInt(sharedPref.getString("table_num", ""));
@@ -112,6 +148,13 @@ public class PayActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * Gets the items for this order
+	 * Adds those items to our data structure
+	 * Notify the adapter that we have new items
+	 * @param the order
+	 * @return the order's items
+	 */
 	public void getOrderItems(ParseObject order){
 		this.order = order;
 		ParseRelation<ParseObject> itemsFromOrder = order.getRelation("items");
@@ -132,6 +175,9 @@ public class PayActivity extends Activity {
 		});
 	}
 	
+	/**
+	 *  Update the total with all the selected items.
+	 */
 	public void updatePrice(){
 		price = 0;
 		for (ParseObject selectedItem : selectedItems){
@@ -143,11 +189,19 @@ public class PayActivity extends Activity {
 		orderTotal.setText("$" + price + ".00");
 	}
 	
+	/**
+	 * Show a toast if we have no open orders
+	 */
 	public void noTableOrders(){
 		Toast.makeText(getApplicationContext(), "No Open Orders!", 5).show();
 		finish();
 	}
 	
+	/**
+	 * Loop through all splittled items and add corresponding items to bills
+	 * Loop through non-selected items and add to bills
+	 * Save all data in phone number, items key value hashmap.
+	 */
 	public void saveCurrentBill() {
 		EditText phoneNumberField = (EditText)findViewById(R.id.phoneNumberInput);
 		String phoneNumber = phoneNumberField.getText().toString();
@@ -189,6 +243,11 @@ public class PayActivity extends Activity {
 		phoneNumberField.setText("");
 	}
 	
+	/**
+	 * On press submit.
+	 *
+	 * @param view the view
+	 */
 	public void onPressSubmit(View view) {
 		saveCurrentBill();
 		clearListItems();
@@ -204,6 +263,11 @@ public class PayActivity extends Activity {
 		}
 	}
 	
+	/**
+	 * Show item split dialog. Prompt the user to either split or not split the item
+	 *
+	 * @param item the item
+	 */
 	public void showItemSplitDialog(final ParseObject item){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Splitting this item?");
@@ -227,6 +291,9 @@ public class PayActivity extends Activity {
 		builder.create().show();
 	}
 	
+	/**
+	 * Clear list items for the next bill
+	 */
 	public void clearListItems(){
 		ListView listView1 = (ListView) findViewById(R.id.listView1);
 		listView1.clearChoices();

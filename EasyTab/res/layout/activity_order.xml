@@ -41,6 +41,7 @@
          android:layout_alignLeft="@+id/button_submit"
          android:layout_alignTop="@+id/listView1"
          android:layout_marginTop="66dp"
+         android:textSize="26sp"
          android:text="@string/order_total_label" />
 
      <TextView
@@ -50,6 +51,7 @@
          android:layout_alignLeft="@+id/orderTotalLabel"
          android:layout_below="@+id/orderTotalLabel"
          android:layout_marginTop="39dp"
+         android:textSize="48sp"
          android:text="@string/defaultOrderTotal" />
      
 </RelativeLayout>

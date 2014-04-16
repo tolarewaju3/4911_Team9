@@ -23,45 +23,56 @@
 
      </ListView>
 
-     <Button
-         android:id="@+id/button_submit"
-         android:onClick="onPressSubmit"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBottom="@+id/listView1"
-         android:layout_marginBottom="36dp"
-         android:layout_marginLeft="201dp"
-         android:layout_toRightOf="@+id/listView1"
-         android:text="@string/defaultNextText" />
-
-     <EditText
-         android:id="@+id/phoneNumberInput"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/orderTotalLabel"
-         android:layout_centerVertical="true"
-         android:ems="10"
-         android:inputType="phone" >
-
-         <requestFocus />
-     </EditText>
-
      <TextView
          android:id="@+id/orderTotalLabel"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/button_submit"
          android:layout_alignTop="@+id/listView1"
-         android:layout_marginTop="66dp"
-         android:text="@string/order_total_label" />
+         android:layout_marginTop="48dp"
+         android:text="@string/order_total_label"
+         android:textSize="26sp" />
+
+     <EditText
+         android:id="@+id/phoneNumberInput"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/orderTotal"
+         android:layout_below="@+id/orderTotal"
+         android:layout_marginTop="62dp"
+         android:ems="10"
+         android:inputType="phone" />
+
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/phoneNumberInput"
+         android:layout_below="@+id/orderTotal"
+         android:layout_marginTop="16dp"
+         android:text="@string/phone_number_"
+         android:textSize="26sp"
+         tools:ignore="HardcodedText" />
 
      <TextView
          android:id="@+id/orderTotal"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/orderTotalLabel"
+         android:layout_alignRight="@+id/orderTotalLabel"
          android:layout_below="@+id/orderTotalLabel"
-         android:layout_marginTop="39dp"
-         android:text="@string/defaultOrderTotal" />
+         android:layout_marginTop="15dp"
+         android:text="@string/defaultOrderTotal"
+         android:textSize="48sp" />
+
+     <Button
+         android:id="@+id/button_submit"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/phoneNumberInput"
+         android:layout_marginLeft="200dp"
+         android:layout_marginTop="34dp"
+         android:layout_toRightOf="@+id/listView1"
+         android:onClick="onPressSubmit"
+         android:text="@string/defaultNextText" />
      
 </RelativeLayout>

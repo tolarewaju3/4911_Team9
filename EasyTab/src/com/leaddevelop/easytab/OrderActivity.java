@@ -30,16 +30,33 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OrderActivity.
+ */
 public class OrderActivity extends Activity {
 
+	/** The item objects. */
 	List<ParseObject> itemObjects;
+	
+	/** The selected items. */
 	List<ParseObject> selectedItems;
+	
+	/** The items for our order. */
 	ArrayList<String> orderItems;
+	
+	/** The adapter to display our items. */
 	ArrayAdapter<String> adapter;
+	
+	/** The price for this order. */
 	int price;
 	
+	/** The menu for our restaurant. */
 	ParseObject menu;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,7 +95,12 @@ public class OrderActivity extends Activity {
 
 	}
 
-	// Get the menu for this restaurant
+	/**
+	 * Get the user for this restaurant
+	 * Get the menu items for this user
+	 *
+	 * @return the menu items
+	 */
 	public void getMenuItems(){ 
 		ParseUser user = ParseUser.getCurrentUser();
 		menu = user.getParseObject("menu");
@@ -97,6 +119,11 @@ public class OrderActivity extends Activity {
 		});
 	}
 
+	/**
+	 * List menu items and add them to the adapter to be displayed.
+	 *
+	 * @param menuItems the menu items
+	 */
 	public void listMenuItems(List<ParseObject> menuItems) {
 		for(ParseObject item : menuItems) {
 			String price = "[$" + item.getInt("price") + ".00]";
@@ -106,6 +133,9 @@ public class OrderActivity extends Activity {
 		adapter.notifyDataSetChanged();
 	}
 
+	/**
+	 * Update the total with all the selected items.
+	 */
 	public void updatePrice(){
 		price = 0;
 		for (ParseObject selectedItem : selectedItems){
@@ -127,6 +157,9 @@ public class OrderActivity extends Activity {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -134,6 +167,9 @@ public class OrderActivity extends Activity {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -151,6 +187,11 @@ public class OrderActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * On press submit.
+	 *
+	 * @param view the view
+	 */
 	public void onPressSubmit(View view) {
 		// do something
 		if(selectedItems.size() == 0) {
@@ -158,6 +199,12 @@ public class OrderActivity extends Activity {
 		} else submitOrder();
 	}
 	
+	/**
+	 * Create an order with our table number from settings
+	 * Add our items to the order
+	 * If there is an error, show an error toast
+	 * Submit order.
+	 */
 	public void submitOrder(){	
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 		int tableNumber = Integer.parseInt(sharedPref.getString("table_num", ""));

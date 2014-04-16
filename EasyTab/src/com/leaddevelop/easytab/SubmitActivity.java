@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -26,15 +25,30 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SubmitActivity.
+ */
 public class SubmitActivity extends Activity {
 
+	/** The exp list view. */
 	private ExpandableListView expListView;
+	
+	/** The tax multiplier. */
 	private final double taxMultiplier = 1.08;
 	
-	 HashMap<String, List<ParseObject>> updatedBills;
-	 HashMap<String, Double> totals;
-	 ParseObject order;
+	 /** The updated bills. */
+ 	HashMap<String, List<ParseObject>> updatedBills;
+	 
+ 	/** The totals. */
+ 	HashMap<String, Double> totals;
+	 
+ 	/** The order. */
+ 	ParseObject order;
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +92,11 @@ public class SubmitActivity extends Activity {
 	
 	/**
 	 * Takes in the bills and returns a data structure with calculated
-	 * total per person
-	 * @param bills
-	 * @param splittedBills
-	 * @return
+	 * total per person.
+	 *
+	 * @param bills the bills
+	 * @param splittedBills the splitted bills
+	 * @return the hash map
 	 */
 	private HashMap<String, Double> calculateTotals(
 			HashMap<String, List<ParseObject>> bills,
@@ -107,6 +122,13 @@ public class SubmitActivity extends Activity {
 		return totals;
 	}
 	
+	/**
+	 * Update individual bills.
+	 *
+	 * @param bills the bills
+	 * @param splittedBills the splitted bills
+	 * @return the hash map
+	 */
 	public HashMap<String, List<ParseObject>> updateIndividualBills(
 			HashMap<String, List<ParseObject>> bills,
 			HashMap<ParseObject, List<String>> splittedBills) {
@@ -121,6 +143,12 @@ public class SubmitActivity extends Activity {
 		return bills;
 	}
 	
+	/**
+	 * Upload bills.
+	 *
+	 * @param bills the bills
+	 * @param totals the totals
+	 */
 	public void uploadBills(HashMap<String, List<ParseObject>> bills,
 			HashMap<String, Double> totals) {
 		List<ParseObject> billsToSave = new ArrayList<ParseObject>();
@@ -161,6 +189,9 @@ public class SubmitActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * Send paypal links.
+	 */
 	public void sendPaypalLinks(){
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		ParseUser user = ParseUser.getCurrentUser();
@@ -180,10 +211,18 @@ public class SubmitActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * On press submit.
+	 *
+	 * @param view the view
+	 */
 	public void onPressSubmit(View view) {
 		uploadBills(updatedBills, totals);
 	}
 	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -193,9 +232,10 @@ public class SubmitActivity extends Activity {
 
 	
 	/**
-	 * Takes in the bill data structure and returns it in text form
-	 * @param bills
-	 * @return
+	 * Takes in the bill data structure and returns it in text form.
+	 *
+	 * @param bills the bills
+	 * @return the hash map
 	 */
 	public HashMap<String, List<String>> parseBillsToText(HashMap<String, List<ParseObject>> bills) {
 		HashMap<String, List<String>> personalSummaries = new HashMap<String, List<String>>();
