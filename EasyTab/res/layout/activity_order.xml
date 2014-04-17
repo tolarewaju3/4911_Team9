@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#EAE2D8"
     tools:context=".PayActivity" >
     
      <View
@@ -22,17 +23,6 @@
          android:layout_centerVertical="true" >
 
      </ListView>
-
-     <Button
-         android:id="@+id/button_submit"
-         android:onClick="onPressSubmit"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBottom="@+id/listView1"
-         android:layout_marginBottom="36dp"
-         android:layout_marginLeft="201dp"
-         android:layout_toRightOf="@+id/listView1"
-         android:text="@string/submit_button_text" />
 
      <TextView
          android:id="@+id/orderTotalLabel"
@@ -53,5 +43,17 @@
          android:layout_marginTop="39dp"
          android:textSize="48sp"
          android:text="@string/defaultOrderTotal" />
+
+     <Button
+         android:id="@+id/button_submit"
+         style="@style/button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/orderTotal"
+         android:layout_marginLeft="202dp"
+         android:layout_marginTop="56dp"
+         android:layout_toRightOf="@+id/listView1"
+         android:onClick="onPressSubmit"
+         android:text="@string/submit_button_text" />
      
 </RelativeLayout>

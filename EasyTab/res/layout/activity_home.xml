@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#EAE2D8"
     tools:context=".HomeActivity" >
 
     <Button
@@ -16,7 +17,8 @@
         android:layout_alignRight="@+id/place_order_button"
         android:layout_centerVertical="true"
         android:text="@string/pay_now_text"
-        android:onClick="onPressPay" />
+        android:onClick="onPressPay"
+        style="@style/button" />
 
     <Button
         android:id="@+id/place_order_button"
@@ -27,7 +29,8 @@
         android:layout_centerHorizontal="true"
         android:onClick="onPressOrder"
         android:layout_marginBottom="18dp"
-        android:text="@string/place_order_text" />
+        android:text="@string/place_order_text"
+        style="@style/button" />
 
     <Button
         android:id="@+id/settings_button"
@@ -38,6 +41,18 @@
         android:layout_below="@+id/pay_now_button"
         android:layout_marginTop="18dp"
         android:onClick="onPressSettings"
-        android:text="@string/settings_text" />
+        android:text="@string/settings_text"
+        style="@style/button" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:textColor="#2091BD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/place_order_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp"
+        android:text="@string/app_name"
+        android:textSize="48sp" />
 
 </RelativeLayout>

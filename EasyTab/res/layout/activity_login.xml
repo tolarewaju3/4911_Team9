@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="#EAE2D8" >
 
     <View
         android:id="@+id/anchor"
@@ -13,13 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/anchor"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="105dp"
         android:layout_toStartOf="@id/anchor"
         android:hint="@string/username_text"
-        android:paddingBottom="5dp"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:paddingBottom="5dp" />
 
     <EditText
         android:id="@+id/passwordField"
@@ -41,6 +41,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:onClick="onPress"
-        android:text="@string/login_button" />
+        android:text="@string/login_button"
+        style="@style/button" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/usernameField"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_name"
+        android:textColor="#2091BD"
+        android:textSize="48sp" />
 
 </RelativeLayout>

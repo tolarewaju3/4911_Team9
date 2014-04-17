@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#EAE2D8"
     tools:context=".SubmitActivity" >
     
      <View
@@ -60,6 +61,7 @@
          android:layout_alignParentBottom="true"
          android:layout_alignRight="@+id/listView2"
          android:layout_marginRight="168dp"
-         android:text="@string/submit_button_text" />
+         android:text="@string/submit_button_text"
+         style="@style/button" />
      
 </RelativeLayout>

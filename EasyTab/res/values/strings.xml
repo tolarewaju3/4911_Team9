@@ -4,7 +4,7 @@
     <string name="app_name">EasyTab</string>
     <string name="action_settings">Settings</string>
     <string name="hello_easytab">Hello EasyTab!</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">EasyTab</string>
     <string name="hello_world">Hello world!</string>
     <string name="username_text">Username</string>
     <string name="password_text">Password</string>
@@ -12,16 +12,15 @@
     <string name="pay_now_text">Pay now</string>
     <string name="settings_text">Settings</string>
     <string name="place_order_text">Place order</string>
-    <string name="title_activity_pay">PayActivity</string>
+    <string name="title_activity_pay">Payment Processing</string>
     <string name="tip_button_text">Tip</string>
     <string name="order_total_label">Your total:</string>
     <string name="defaultOrderTotal">$0.00</string>
     <string name="defaultNextText">Next</string>
-    <string name="title_activity_submit">SubmitActivity</string>
+    <string name="title_activity_submit">Submitting an Order</string>
     <string name="submit_button_text">Submit</string>
-    <string name="title_activity_order">OrderActivity</string>
-    <string name="bill_summary_text">Bill summary</string>
-    <string name="bill_totals_text">Bill totals</string>
+    <string name="title_activity_order">Placing an Order</string>
+    <string name="bill_summary_text">Bill Summary</string>
+    <string name="bill_totals_text">Bill Totals</string>
     <string name="phone_number_">Phone Number:</string>
-
 </resources>
