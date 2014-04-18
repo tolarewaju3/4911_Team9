@@ -16,11 +16,19 @@ EXPECTED OUTPUT: Toast "Order Submitted" should appear
 EXPECTED OUTPUT: Order Object with unique id should appear in database 
 
 
+// Test the pay now page
+INPUT: Select number of bills
+INPUT: Select number of items for each bill
+INPUT: Enter phone numbers
+EXPECTED OUTPUT: Summary screen mapping phone numbers to item selected
+
 // Test the Settings Page
 INPUT: click the "Settings" button
 OUTPUT:Setting Screen should show
 INPUT: Change the table number
 INPUT: Make a Order Using the Ordering Page
 OUTPUT: Order object should be in order database with correct table id
+
+
 
 
