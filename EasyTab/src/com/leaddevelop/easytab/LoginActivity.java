@@ -66,22 +66,9 @@ public class LoginActivity extends Activity {
 				if(user != null) {
 //					completeLogin();
 					Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-					try {
-						SMSHandler.sendSMS("+14045198174", "Hello world!");
-					} catch (TwilioRestException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					startActivity(intent);
-
 				} else {
 					Toast.makeText(getApplicationContext(), "Login failed!", 5).show();
-					try {
-						SMSHandler.sendSMS("+14045198174", "Hello world!");
-					} catch (TwilioRestException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				}
 			}
 		});

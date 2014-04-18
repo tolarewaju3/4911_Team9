@@ -182,7 +182,6 @@ public class PayActivity extends Activity {
 		price = 0;
 		for (ParseObject selectedItem : selectedItems){
 			price += selectedItem.getInt("price");
-			System.out.println(selectedItem.get("name"));
 		}
 		
 		TextView orderTotal = (TextView) findViewById(R.id.orderTotal);
@@ -299,7 +298,6 @@ public class PayActivity extends Activity {
 		listView1.clearChoices();
         for (int i = 0; i < listView1.getCount(); i++){
         	CheckedTextView textView = (CheckedTextView)listView1.getChildAt(i);
-       	 	System.out.println(textView.getText());
        	 	textView.setChecked(false);
         }
 	}

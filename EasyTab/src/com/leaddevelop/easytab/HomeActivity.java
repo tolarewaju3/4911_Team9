@@ -65,7 +65,6 @@ public class HomeActivity extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(getApplicationContext(), PayActivity.class);
-				System.out.println("Getting: " + input.getText().toString());
 				intent.putExtra("numBills", input.getText().toString());
 				startActivity(intent);
 			}

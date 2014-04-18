@@ -199,14 +199,8 @@ public class SubmitActivity extends Activity {
 		params.put("user", user.getObjectId());
 		ParseCloud.callFunctionInBackground("sendPaypalLinks", params, new FunctionCallback<String>() {
 		   public void done(String done, ParseException e) {
-			   if(e == null){
-					Toast.makeText(getApplicationContext(), "Payment Links Sent!", 5).show();
-					//finish();
-				}
-				else{
-					Toast.makeText(getApplicationContext(), "Processing Links Failed!", 5).show();
-					System.out.println(e.toString());
-				}
+				Toast.makeText(getApplicationContext(), "Payment Links Sent!", 5).show();
+
 		   }
 		});
 	}

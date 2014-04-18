@@ -140,7 +140,6 @@ public class OrderActivity extends Activity {
 		price = 0;
 		for (ParseObject selectedItem : selectedItems){
 			price += selectedItem.getInt("price");
-			System.out.println(selectedItem.get("name"));
 		}
 
 		TextView orderTotal = (TextView) findViewById(R.id.orderTotal);
