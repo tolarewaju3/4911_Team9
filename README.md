@@ -7,7 +7,7 @@ Vision
 
 When discussing everyday problems amongst our group, we came to several wild ideas. We wanted to create smart shopping carts that allowed users to pay via PayPal. There was also an idea about using a raspberry pi to start a car from a far because of the harsh cold weather. But in the end, we came to the idea of a smart bill splitting app. The problem stemmed from trouble in splitting a bill when in a large group. We came up with three individual issues around bill splitting. One issue was the waiter would get confused as to which ways to split causing overcharges. Another problem is when the waiter has to deal with POS constraints. For instance, the POS would allow bills to be split a maximum of three ways. The final scenario is when a group decides one person pay the entire bill and they do not get paid back. Bill splitting is both a problem for retail locations and for customers. We want to fix that.
  
-To solve these problems we have come up with an end-to-solution that helps both customer and seller. It features a single tablet that sits at every table. Each table has a number, and each tablet is preconfigured with our software and their table number. When it’s time to pay, the people in the group can sift through what they bought and choose what they want to pay for. For each bill, the customer will enter in their cell phone number and get a bill url texted to them. On this page users will see options to pay will PayPal, Google Wallet, Cash, or a Credit Card.
+To solve these problems we have come up with an end-to-end solution that helps both customer and seller. It features a single tablet that sits at every table. Each table has a number, and each tablet is preconfigured with our software and their table number. When it’s time to pay, the people in the group can sift through what they bought and choose what they want to pay for. For each bill, the customer will enter in their cell phone number and get a bill url texted to them. On this page users will see options to pay will PayPal, Google Wallet, Cash, or a Credit Card.
 
 This solution makes it easier for both waiters and customers. For the waiters, they will be able to easily assign purchases to a table. Also, they will no longer have to run between tables to handle receipts, credit cards, and cash. And mostly, the app will benefit the customer. They will be able to drag and drop purchased menu items and pay right at the table.
 
@@ -38,4 +38,8 @@ Deployment of the site is through Pancake.io. To see refelcted changes pushed on
 
 _Android Platform_
 
+A .apk file has been compiled and placed in the root directory. This file can be installed to an Android tablet by connecting the tablet to the computer with USB debugging enabled, then executing the following adb command in the directory containing easytab.apk (for instructions on how to use adb, read here: http://developer.android.com/tools/help/adb.html):
 
+adb install easytab.apk
+
+EasyTab communicates with Parse to carry out ordering and payment functionality. A functional test list is located at the root of this repository.
